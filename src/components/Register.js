@@ -15,7 +15,7 @@ export default function Register() {
         })
     }
     return (
-        <div className="login">
+        <div className="register">
             <h1>Register</h1>
             <form>
                 <input

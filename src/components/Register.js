@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 
-export default function Register() {
+export default function Register(props) {
     const [formData, setFormData] = useState(
         { username: "", password: "" }
     )
@@ -33,6 +33,9 @@ export default function Register() {
                     value={formData.password}
                 />
             </form>
+            <button onClick={e => console.log("clicked")}>Submit</button>
+            <button onClick={props.toggleRegister}>Login here</button>
+
         </div>
     )
 }

@@ -1,14 +1,21 @@
+import React, { useState } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header';
 import './App.css';
 
 function App() {
+  const [showRegister, setShowRegister] = useState(false) 
+
+  function toggleRegister() {
+    setShowRegister(!showRegister);
+  }
+
   return (
     <div className="Landing">
       <Header />
-      <Login />
-      <Register />
+      {showRegister ? <Login toggleRegister = {toggleRegister}/> : 
+      <Register toggleRegister={toggleRegister}/>}
 
     </div>
   );

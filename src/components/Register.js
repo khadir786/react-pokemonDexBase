@@ -16,7 +16,7 @@ export default function Register(props) {
     }
     return (
         <div className="register-login">
-            <h1>Register</h1>
+            <h1 className="register-login-title">Register</h1>
             <form>
                 <input
                     type="text"
@@ -34,7 +34,7 @@ export default function Register(props) {
                 />
             </form>
             <button onClick={e => console.log("clicked")}>Submit</button>
-            <button onClick={props.toggleRegister}>Login here</button>
+            <p onClick={props.toggleRegister}>Login here</p>
 
         </div>
     )

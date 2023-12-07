@@ -6,7 +6,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./img/rotom-bw-small.png");
-  background-position: 100% 50%;
   background-color: rgb(35, 39, 45);
 }
 
@@ -29,8 +28,11 @@ code {
   width: 100%;
   padding-bottom: 10px;
 }
-
 .register-login {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
   margin-bottom: 10px;
   background-color: rgb(28, 31, 35);
   border-radius: 20px;
@@ -38,6 +40,15 @@ code {
   padding: 10px;
   position: relative;
   top: 200px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(171, 147, 147, 0.5);
 
 }
+
+.register-login > p {
+  cursor: pointer;
+}
+
+.register-login-title {
+  margin-top: 10px;
+}
+

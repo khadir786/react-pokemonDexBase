@@ -15,7 +15,7 @@ export default function Register() {
         })
     }
     return (
-        <div className="register">
+        <div className="register-login">
             <h1>Register</h1>
             <form>
                 <input
@@ -27,7 +27,7 @@ export default function Register() {
                 />
                 <input
                     type="password"
-                    placeholder="Username"
+                    placeholder="Password"
                     onChange={handleChange}
                     name="password"
                     value={formData.password}

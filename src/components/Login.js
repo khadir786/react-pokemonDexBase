@@ -15,7 +15,7 @@ export default function Login() {
         })
     }
     return (
-        <div className="login">
+        <div className="register-login">
             <h1>Login</h1>
             <form>
                 <input
@@ -27,7 +27,7 @@ export default function Login() {
                 />
                 <input
                     type="password"
-                    placeholder="Username"
+                    placeholder="Password"
                     onChange={handleChange}
                     name="password"
                     value={formData.password}

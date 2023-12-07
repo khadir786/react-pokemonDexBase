@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import Header from './components/Header';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 function App() {

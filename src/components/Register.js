@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import LoadingButton from "./sub_components/LoadingButton"
 
 export default function Register(props) {
     const [formData, setFormData] = useState(
@@ -18,22 +19,25 @@ export default function Register(props) {
         <div className="register-login">
             <h1 className="register-login-title">Register</h1>
             <form>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    onChange={handleChange}
-                    name="username"
-                    value={formData.username}
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={handleChange}
-                    name="password"
-                    value={formData.password}
-                />
+                <div className="rl-input-container">
+                    <input
+                        className="input-username"
+                        type="text"
+                        placeholder="Username"
+                        onChange={handleChange}
+                        name="username"
+                        value={formData.username}
+                    />
+                    <input
+                        type="password"
+                        placeholder="Password"
+                        onChange={handleChange}
+                        name="password"
+                        value={formData.password}
+                    />
+                </div>
             </form>
-            <button onClick={e => console.log("clicked")}>Submit</button>
+            <LoadingButton />
             <p onClick={props.toggleRegister}>Login here</p>
 
         </div>

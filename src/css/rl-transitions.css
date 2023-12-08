@@ -1,19 +1,38 @@
 /* Enter and Exit Transitions */
-.fade-enter {
+.welcome-fade-enter {
     opacity: 0;
   }
   
-  .fade-enter-active {
+  .welcome-fade-enter-active {
     opacity: 1;
     transition: opacity 500ms ease-in-out;
   }
   
-  .fade-exit {
+  .welcome-fade-exit {
     opacity: 1;
   }
   
-  .fade-exit-active {
+  .welcome-fade-exit-active {
     opacity: 0;
-    transition: opacity 0ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
+  }
+  
+
+.welcome2-fade-enter {
+    opacity: 0;
+  }
+  
+  .welcome2-fade-enter-active {
+    opacity: 1;
+    transition: opacity 2000ms ease-in-out;
+  }
+  
+  .welcome2-fade-exit {
+    opacity: 1;
+  }
+  
+  .welcome2-fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
   }
   

@@ -61,3 +61,7 @@ code {
 .register-login > p {
   cursor: pointer;
 }
+
+.register-login > p:hover {
+  text-decoration: underline;
+}

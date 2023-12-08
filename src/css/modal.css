@@ -1,0 +1,28 @@
+.error-modal {
+    background-color: #ff6b6b;
+    color: #fff;
+}
+
+.warning-modal {
+    color: #333;
+}
+
+.warning-modal .modal-header {
+    background-color: #ffc107a7;
+
+}
+
+.custom-modal .modal-body {
+    /* Add any custom styles for the modal body */
+}
+
+.custom-modal .modal-footer {
+    /* Add any custom styles for the modal footer */
+}
+
+
+.success-modal {
+    background-color: #28a745;
+    color: #fff;
+
+}

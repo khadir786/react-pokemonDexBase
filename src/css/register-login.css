@@ -27,11 +27,3 @@
 .input-username {
   margin-right: 10px;
 }
-
-.register-login > p {
-  cursor: pointer;
-}
-
-.register-login > p:hover {
-  text-decoration: underline;
-}

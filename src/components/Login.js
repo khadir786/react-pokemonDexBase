@@ -66,6 +66,7 @@ export default function Login(props) {
                     </form>
                     <LoadingButton />
                     <p>Don't have an account? <span><Link to="/register">Register here </Link></span></p>
+                    <Link to="/home">Go to user home</Link>
 
                 </div>
             </CSSTransition>

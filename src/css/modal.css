@@ -1,15 +1,26 @@
 .error-modal {
-    background-color: #ff6b6b;
-    color: #fff;
+    color: #ffffff;
+}
+
+.error-modal .modal-header {
+    background-color: #a33838;
+}
+
+.error-modal .modal-body {
+    background-color: #2c2b40e9;
 }
 
 .warning-modal {
-    color: #333;
+    /* color: #7d1818; */
+    color: #ffffff;
 }
 
-.warning-modal .modal-header {
+.warning-modal .modal-header {  
     background-color: #ffc107a7;
+}
 
+.warning-modal .modal-body {  
+    background-color: #2c2b40e9;
 }
 
 .custom-modal .modal-body {

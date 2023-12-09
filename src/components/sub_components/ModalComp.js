@@ -15,7 +15,7 @@ function ModalComp(props) {
     return (
         <div>
             <Modal
-            className='warning-modal' 
+            className={`${props.type}-modal`} 
             show={show} 
             onHide={handleClose}>
                 <Modal.Header closeButton>

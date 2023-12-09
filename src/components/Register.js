@@ -13,6 +13,7 @@ export default function Register(props) {
     const [formData, setFormData] = useState(
         { username: "", password: "" }
     )
+    const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
@@ -27,6 +28,12 @@ export default function Register(props) {
 
     function handleChange(event) {
         const { name, value, type, checked } = event.target
+        setErrorMessage(prevErrorMessage => {
+            return {
+                ...prevErrorMessage,
+                message: ""
+            }
+        })
         setFormData(prevFormData => {
             return {
                 ...prevFormData,
@@ -41,25 +48,37 @@ export default function Register(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-
-        if (!formData.username || !formData.password) {
-            setShowModal(true); // Show the modal when fields are empty
-            return;
+        if (!formData.username || !formData.username) {
+            setErrorMessage(prevErrorMessage => {
+                return {
+                    type: "warning",
+                    message: "Please fill out all fields"
+                }
+            })
+            return toggleModal();
         }
-
         setLoading(true);
 
         registerUser(formData)
-            .then((response) => {
-                console.log("Registration successful:", response);
-                // Handle success
+            .then(response => {
+                console.log('Registration successful:', response);
+                // Handle success...
             })
-            .catch((error) => {
-                console.error("Registration failed:", error);
-                // Handle error
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    console.error('Registration failed:', error.response.data); //this works for some reason
+                    setErrorMessage(prevErrorMessage => {
+                        return {
+                            type:"error",
+                            message: error.response.data
+                        }
+                    })
+                    toggleModal();
+                }
             })
             .finally(() => setLoading(false));
     }
+
 
 
     return (
@@ -97,10 +116,11 @@ export default function Register(props) {
                     <p><Link to="/login">Login here</Link></p>
                     {showModal && (
                         <ModalComp
+                            type={errorMessage.type}
                             show={showModal}
                             toggleModal={toggleModal}
                             heading="Warning!"
-                            message="Please fill out all fields"
+                            message={errorMessage.message}
                         />
                     )}
                 </div>

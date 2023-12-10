@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
 import { registerUser } from "../apiService"
 import ModalComp from "./sub_components/ModalComp";
@@ -16,6 +16,8 @@ export default function Register(props) {
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const registerRef = useRef(null);
+
 
     useEffect(() => {
         // Delay the animation by a short period (e.g., 100 milliseconds)
@@ -90,8 +92,9 @@ export default function Register(props) {
                 timeout={0}
                 classNames="welcome-fade"
                 unmountOnExit
+                nodeRef={registerRef}
             >
-                <div className="register-login">
+                <div className="register-login" ref={registerRef}>
                     <h1 className="register-login-title">Register</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="rl-input-container">

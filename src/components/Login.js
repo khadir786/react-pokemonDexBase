@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
 import { CSSTransition } from 'react-transition-group';
 import '../css/register-login.css';
@@ -9,6 +9,7 @@ import { loginUser } from "../apiService";
 import ModalComp from "./sub_components/ModalComp";
 import { useNavigate } from "react-router-dom";
 
+
 export default function Login() {
     const navigate = useNavigate();
 
@@ -16,6 +17,7 @@ export default function Login() {
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const loginRef = useRef(null);
 
 
     const [formData, setFormData] = useState(
@@ -84,11 +86,12 @@ export default function Login() {
             <Header />
             <CSSTransition
                 in={isLoginVisible}
-                timeout={0}
+                timeout={300}
                 classNames="welcome-fade"
                 unmountOnExit
+                nodeRef={loginRef}
             >
-                <div className="register-login">
+                <div className="register-login" ref={loginRef}>
                     <h1 className="register-login-title">Login</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="rl-input-container">

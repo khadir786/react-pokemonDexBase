@@ -15,8 +15,8 @@ export default function HomeUser() {
     console.log(userData);
     return (
         <div className="Home-container">
-            <Header />
-            <div>
+            <div className="user-header"><Header /></div>
+            <div className="user-content">
                 {userData && <h1>Welcome, {userData.username}</h1>}
             </div>
         </div>

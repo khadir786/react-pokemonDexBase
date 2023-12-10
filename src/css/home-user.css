@@ -1,12 +1,42 @@
-.Home-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: aliceblue;
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
 }
 .header {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* padding-bottom: 0px; */
+}
+
+/* .Logo {
+    margin: 10px;
+    margin-right: auto;
+    max-width: 200px;
+    max-height: 200px;
+} */
+
+.Home-container {
+    display: grid;
+    grid-template-columns: 0.5fr repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    align-items: center;
+    justify-content: center;
+    color: yellow;
+    height:auto;
+}
+
+.user-header {
+    grid-area: 1 / 1 / 2 / 6;
+}
+
+.sidebar {
+    grid-area: 2 / 1 / 6 / 2;
+}
+
+.user-content {
+    grid-area: 2 / 2 / 6 / 6;
 }

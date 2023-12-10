@@ -21,3 +21,21 @@ export const registerUser = async (userData) => {
         throw error;
     }
 };
+
+export const loginUser = async (username, password) => {
+    const params = new URLSearchParams();
+    params.append('username', username);
+    params.append('password', password);
+
+    try {
+        const response = await axios.post(`${API_BASE_URL}/api/auth/login`, params, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error logging in user:', error);
+        throw error;
+    }
+};

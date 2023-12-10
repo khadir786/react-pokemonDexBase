@@ -5,9 +5,17 @@ import '../css/register-login.css';
 import '../css/rl-transitions.css';
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import { loginUser } from "../apiService";
+import ModalComp from "./sub_components/ModalComp";
+import { useNavigate } from "react-router-dom";
 
-export default function Login(props) {
+export default function Login() {
+    const navigate = useNavigate();
+
     const [isLoginVisible, setIsLoginVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
+    const [isLoading, setLoading] = useState(false);
+    const [showModal, setShowModal] = useState(false);
 
 
     const [formData, setFormData] = useState(
@@ -32,8 +40,46 @@ export default function Login(props) {
             }
         })
     }
-    return (
 
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (!formData.username || !formData.username) {
+            setErrorMessage(prevErrorMessage => {
+                return {
+                    type: "warning",
+                    message: "Please fill out all fields"
+                }
+            })
+            return toggleModal();
+        }
+        setLoading(true);
+
+        loginUser(formData.username, formData.password)
+            .then(response => {
+                console.log('Login successful:', response);
+                // Handle success...
+                navigate('/home', { state: { user: response } })
+            })
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    console.error('Login failed:', error.response.data);
+                    setErrorMessage(prevErrorMessage => {
+                        return {
+                            type:"error",
+                            message: error.response.data
+                        }
+                    })
+                    toggleModal();
+                }
+            })
+            .finally(() => setLoading(false));
+    }
+
+    function toggleModal() {
+        setShowModal(!showModal);
+    }
+
+    return (
         <div className="Landing">
             <Header />
             <CSSTransition
@@ -43,9 +89,8 @@ export default function Login(props) {
                 unmountOnExit
             >
                 <div className="register-login">
-
                     <h1 className="register-login-title">Login</h1>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="rl-input-container">
                             <input
                                 className="input-username"
@@ -63,14 +108,21 @@ export default function Login(props) {
                                 value={formData.password}
                             />
                         </div>
+                        <LoadingButton type="submit" />
                     </form>
-                    <LoadingButton />
                     <p>Don't have an account? <span><Link to="/register">Register here </Link></span></p>
                     <Link to="/home">Go to user home</Link>
-
+                    {showModal && (
+                        <ModalComp
+                            type={errorMessage.type}
+                            show={showModal}
+                            toggleModal={toggleModal}
+                            heading="Warning!"
+                            message={errorMessage.message}
+                        />
+                    )}
                 </div>
             </CSSTransition>
         </div>
-
-    )
+    );
 }

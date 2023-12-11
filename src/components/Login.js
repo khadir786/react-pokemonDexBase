@@ -14,7 +14,7 @@ export default function Login() {
     const navigate = useNavigate();
 
     const [isLoginVisible, setIsLoginVisible] = useState(false);
-    const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
+    const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const loginRef = useRef(null);
@@ -49,7 +49,8 @@ export default function Login() {
             setErrorMessage(prevErrorMessage => {
                 return {
                     type: "warning",
-                    message: "Please fill out all fields"
+                    message: "Please fill out all fields",
+                    heading: "Warning!"
                 }
             })
             return toggleModal();
@@ -68,7 +69,8 @@ export default function Login() {
                     setErrorMessage(prevErrorMessage => {
                         return {
                             type:"error",
-                            message: error.response.data
+                            message: error.response.data,
+                            heading: "Login failed..."
                         }
                     })
                     toggleModal();
@@ -120,7 +122,7 @@ export default function Login() {
                             type={errorMessage.type}
                             show={showModal}
                             toggleModal={toggleModal}
-                            heading="Warning!"
+                            heading={errorMessage.heading}
                             message={errorMessage.message}
                         />
                     )}

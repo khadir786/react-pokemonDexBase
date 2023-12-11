@@ -13,7 +13,7 @@ export default function Register(props) {
     const [formData, setFormData] = useState(
         { username: "", password: "" }
     )
-    const [errorMessage, setErrorMessage] = useState({ type: "", message: "" });
+    const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const registerRef = useRef(null);
@@ -54,7 +54,8 @@ export default function Register(props) {
             setErrorMessage(prevErrorMessage => {
                 return {
                     type: "warning",
-                    message: "Please fill out all fields"
+                    message: "Please fill out all fields",
+                    heading: "Warning!"
                 }
             })
             return toggleModal();
@@ -65,6 +66,14 @@ export default function Register(props) {
             .then(response => {
                 console.log('Registration successful:', response);
                 // Handle success...
+                setErrorMessage(prevErrorMessage => {
+                    return {
+                        type:"success",
+                        message: `User: ${response.username} has been registered!!!`,
+                        heading: "Success!"
+                    }
+                })
+                toggleModal();
             })
             .catch(error => {
                 if (error.response && error.response.data) {
@@ -72,7 +81,8 @@ export default function Register(props) {
                     setErrorMessage(prevErrorMessage => {
                         return {
                             type:"error",
-                            message: error.response.data
+                            message: error.response.data,
+                            heading: "Registration failed..."
                         }
                     })
                     toggleModal();
@@ -122,7 +132,7 @@ export default function Register(props) {
                             type={errorMessage.type}
                             show={showModal}
                             toggleModal={toggleModal}
-                            heading="Warning!"
+                            heading={errorMessage.heading}
                             message={errorMessage.message}
                         />
                     )}

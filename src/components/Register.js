@@ -89,7 +89,7 @@ export default function Register(props) {
 
             <CSSTransition
                 in={isRegisterVisible}
-                timeout={0}
+                timeout={300}
                 classNames="welcome-fade"
                 unmountOnExit
                 nodeRef={registerRef}

@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import HomeUser from './components/HomeUser';
 import Test from './components/Test';
+import PartnerPick from './components/PartnerPick';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<HomeUser />} />
           <Route path="/trainer" element={<Test />} />
+          <Route path="/partner" element={<PartnerPick />} />
           {/* Add other routes here */}
         </Routes>
       </div>

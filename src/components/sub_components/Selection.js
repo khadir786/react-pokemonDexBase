@@ -3,10 +3,12 @@ import '../../css/selection.css';
 
 const Selection = ({ images }) => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [activePokemon, setActivePokemon] = useState(null);
   const containerRef = useRef(null);
 
-  const handlePreviewClick = (index) => {
+  const handlePreviewClick = (index, pokemon) => {
     setActiveIndex(index);
+    setActivePokemon(pokemon.name)
   };
 
   useEffect(() => {
@@ -25,7 +27,7 @@ const Selection = ({ images }) => {
     };
   }, []);
 
-  console.log(activeIndex);
+  console.log(activePokemon);
 
   return (
     <div className="selection-container" ref={containerRef}>
@@ -34,9 +36,9 @@ const Selection = ({ images }) => {
           <div
             key={index}
             className={`preview ${index === activeIndex ? 'active' : ''}`}
-            onClick={() => handlePreviewClick(index)}
+            onClick={() => handlePreviewClick(index, image)}
           >
-            <img src={image} alt={`${index}`} />
+            <img src={image.image} alt={`${index}`} />
           </div>
         ))}
       </div>

@@ -6,7 +6,6 @@ export default function PartnerPick() {
     const partners = PartnerSprites.data.partner
     return (
         <div className="partners">
-            <h1>Partners in Crime</h1>
             <Selection images={partners} />
         </div>
     )

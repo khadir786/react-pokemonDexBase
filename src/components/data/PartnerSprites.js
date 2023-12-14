@@ -1,8 +1,8 @@
-import eevee from '../../img/eevee.gif';
-import oshawott from "../../img/oshawott.gif"
-import pikachu from "../../img/pikachu.gif"
-import riolu from "../../img/riolu.gif"
-import rotom from "../../img/rotom.gif"
+import eevee from '../../img/partner/eevee.gif';
+import oshawott from "../../img/partner/oshawott.gif"
+import pikachu from "../../img/partner/pikachu.gif"
+import riolu from "../../img/partner/riolu.gif"
+import rotom from "../../img/partner/rotom.gif"
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {

@@ -1,9 +1,32 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+body {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
+
+
+.Selection {
+    color: white;
+    text-align: center;
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    max-width: 800px;
+}
+
+
 .selection-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    max-width: 500px;
     height: 150px;
 }
 
@@ -46,3 +69,19 @@
     max-width: 100%;
     height: auto; /* This will maintain aspect ratio */
 }
+
+.pokemonName {
+    overflow: visible;
+}
+
+.dexContainer {
+    display: flex;
+    width: auto;
+    height: max-content;  
+}
+
+.dexEntry {
+    height: auto;
+}
+
+

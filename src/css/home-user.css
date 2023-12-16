@@ -17,27 +17,3 @@ html, body {
     max-width: 200px;
     max-height: 200px;
 } */
-
-.Home-container {
-    display: grid;
-    grid-template-columns: 0.5fr repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    align-items: center;
-    justify-content: center;
-    color: yellow;
-    height:auto;
-}
-
-.user-header {
-    grid-area: 1 / 1 / 2 / 6;
-}
-
-.sidebar {
-    grid-area: 2 / 1 / 6 / 2;
-}
-
-.user-content {
-    grid-area: 2 / 2 / 6 / 6;
-}

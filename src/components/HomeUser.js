@@ -2,24 +2,49 @@ import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import '../css/home-user.css';
 import { useLocation } from "react-router-dom";
+import Partners from "./data/PartnerData.js";
+import { getUser } from "../apiService.js";
 
-// this page will be generated from server-side data
-// the page before this, (probably Login.js) will pass an object in state that contains the user's information
-// might be a better idea to save the data in localstorage
-// so far, there is nothing in the user's information thats really custom except for their username
-// so we will just use the username as the title
 
 export default function HomeUser() {
+    const [userData, setUserData] = useState({});
+    const [errorMessage, setErrorMessage] = useState("");
     const location = useLocation();
-    const userData = location.state?.user;
-    console.log(userData);
+    const userID = location.state?.user.id;
+    const partners = Partners.data.partner;
+
+    useEffect(() => {
+        getUser(userID)
+            .then(response => {
+                //Handle success...
+                console.log(response);
+                setUserData(response);
+            })
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    console.error('Error getting user details...:', error.response.data);
+                    setErrorMessage("Error getting user details...");
+                }
+            })
+    }, [])
+    
+
+    const foundPartner = partners.find(partner => partner.name === userData.partnerPokemon);
+
+
     return (
-        <div className="Home-container">
-            <div className="user-header"><Header /></div>
+        <div>
+            <Header />
             <div className="user-content">
                 {userData && <h1>Welcome, {userData.username}</h1>}
+                {foundPartner &&
+                    <div className="user-partner">
+                        <h1>Partner Pokemon: {foundPartner.name}</h1>
+                        <img src={foundPartner.image} alt="Partner Pokemon"/>
+                    </div>
+                }
+                {errorMessage && <div className="error">{errorMessage}</div>}
             </div>
         </div>
-
-    )
+    );
 }

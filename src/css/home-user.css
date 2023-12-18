@@ -11,6 +11,18 @@ html, body {
     /* padding-bottom: 0px; */
 }
 
+.user-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+}
+
+.error {
+    color: red;
+}
+
 /* .Logo {
     margin: 10px;
     margin-right: auto;

@@ -22,6 +22,16 @@ export const getUser = async (id) => {
     }
 };
 
+export const updateUser = async (id, userData) => {
+    try {
+        const response = await axios.put(`${API_BASE_URL}/api/${id}`, userData);
+        return response.data;
+    } catch (error) {
+        console.error("Error updating user:", error);
+        throw error;
+    }
+}
+
 export const registerUser = async (userData) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/api/auth/register`, userData);

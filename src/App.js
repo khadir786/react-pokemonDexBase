@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import HomeUser from './components/HomeUser';
-import Test from './components/Test';
+import TrainerImageGallery from './components/AvatarPick';
 import PartnerPick from './components/PartnerPick';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/home" element={<HomeUser />} />
-          <Route path="/trainer" element={<Test />} />
+          <Route path="/trainer" element={<TrainerImageGallery />} />
           <Route path="/partner" element={<PartnerPick />} />
           {/* Add other routes here */}
         </Routes>

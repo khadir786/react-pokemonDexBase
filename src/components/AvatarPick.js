@@ -6,33 +6,38 @@ import '../css/avatar.css';
 
 export default function TrainerImageGallery() {
   const trainers = TrainerSprites.data.trainers;
-  const itemsPerPage = 20; // Number of items per page
+  const itemsPerPage = 30; // Number of items per page
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(trainers[0].name);
+  const [selectedModalImage, setSelectedModalImage] = useState(null);
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
 
   const openModal = (trainerName) => {
-    setSelectedImage(trainerName);
+    setSelectedModalImage(trainerName);
   };
 
   const closeModal = () => {
-    setSelectedImage(null);
+    setSelectedModalImage(null);
   };
 
   const renderImages = () => {
+    // create an array with the sprites to be currently shown 
     const startIndex = currentPage * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const currentTrainers = trainers.slice(startIndex, endIndex);
 
     return currentTrainers.map((trainer) => (
-      <li key={trainer.name} onClick={() => openModal(trainer.name)}>
+      <li key={trainer.name} onClick={() => {
+        setSelectedImage(trainer.name);
+      }
+      }>
         <img
           src={`https://play.pokemonshowdown.com/sprites/trainers/${trainer.name}.png`}
           alt={trainer.name}
-          className="trainer-sprite"
+          className={`trainer-sprite ${trainer.name === selectedImage ? 'active' : 'notActive'}`}
         />
       </li>
     ));
@@ -40,6 +45,15 @@ export default function TrainerImageGallery() {
 
   return (
     <div className="Avatar-container">
+
+      <div className="selected-avatar">
+        <img
+          src={`https://play.pokemonshowdown.com/sprites/trainers/${selectedImage}.png`}
+          alt={selectedImage}
+          onClick={() => openModal(selectedImage)}
+        />
+      </div>
+
       <ul className="trainer-list">{renderImages()}</ul>
 
       <ReactPaginate
@@ -52,14 +66,14 @@ export default function TrainerImageGallery() {
       />
 
       <ReactModal
-        isOpen={selectedImage !== null}
+        isOpen={selectedModalImage !== null}
         onRequestClose={closeModal}
         ariaHideApp={false}
         className="modal"
       >
         <img
-          src={`https://play.pokemonshowdown.com/sprites/trainers/${selectedImage}.png`}
-          alt={selectedImage}
+          src={`https://play.pokemonshowdown.com/sprites/trainers/${selectedModalImage}.png`}
+          alt={selectedModalImage}
         />
         <button onClick={closeModal}>Close</button>
       </ReactModal>

@@ -1,7 +1,25 @@
 .Avatar-container {
-  max-width: 500px;
+  max-width: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
+.selected-avatar {
+  border: 2px solid #ccc;
+  outline: none; /* Remove the default focus outline */
+}
+
+
+.selected-avatar:hover {
+  border-color: #007bff; /* Change the border color */
+  outline: 2px solid #007bff; /* Add a blue outline */
+}
+
+.selected-avatar img {
+  cursor: pointer;
+}
 
 .trainer-list {
     list-style-type: none;
@@ -66,6 +84,10 @@
     transition: transform 0.3s;
   }
 
+  .trainer-sprite.active {
+    transform: scale(1.4);
+  }
+
   .trainer-sprite:hover {
-    transform: scale(1.5);
+    transform: scale(1.4);
   }

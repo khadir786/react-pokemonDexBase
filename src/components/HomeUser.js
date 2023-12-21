@@ -5,12 +5,15 @@ import { useLocation } from "react-router-dom";
 import Partners from "./data/PartnerData.js";
 import { getUser } from "../apiService.js";
 
+// Any time the user is redirected, userID must be passed along with it. 
+// And then in the new page, if redirected back to the original, that userID must be passed back
+// This is recieved through location
 
 export default function HomeUser() {
     const [userData, setUserData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
     const location = useLocation();
-    const userID = location.state?.user.id;
+    const userID = location.state?.id;
     const partners = Partners.data.partner;
 
     useEffect(() => {

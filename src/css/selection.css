@@ -1,38 +1,24 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-  }
-
-body {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-
-}
-
-
 .Selection {
     color: white;
     text-align: center;
     display: flex;
     align-content: center;
     flex-direction: column;
-    max-width: 800px;
+    max-width: fit-content;
 }
 
 
 .selection-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
     height: 150px;
+    width: 600px;
+    display: flex;
+    align-items: center;
 }
 
 .previews {
     display: flex;
-    gap: 30px;
+    width: 600px;
+    justify-content: space-evenly;
 }
 
 .preview {

@@ -8,6 +8,8 @@ import Register from './components/Register';
 import HomeUser from './components/HomeUser';
 import TrainerImageGallery from './components/AvatarPick';
 import PartnerPick from './components/PartnerPick';
+import CreateProfile from './components/CreateProfile';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
           <Route path="/home" element={<HomeUser />} />
           <Route path="/trainer" element={<TrainerImageGallery />} />
           <Route path="/partner" element={<PartnerPick />} />
+          <Route path="/create-profile" element={<CreateProfile />} />
           {/* Add other routes here */}
         </Routes>
       </div>

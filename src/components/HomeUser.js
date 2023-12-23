@@ -5,6 +5,8 @@ import { useLocation } from "react-router-dom";
 import Partners from "./data/PartnerData.js";
 import Avatars from "./data/TrainerSpriteNames.js";
 import { getUser } from "../apiService.js";
+import { useNavigate } from "react-router-dom";
+
 
 // Any time the user is redirected, userID must be passed along with it. 
 // And then in the new page, if redirected back to the original, that userID must be passed back
@@ -17,25 +19,29 @@ export default function HomeUser() {
     const userID = location.state?.id;
     const avatars = Avatars.data.trainers;
     const partners = Partners.data.partner;
-    useEffect(() => {
-        getUser(userID)
-            .then(response => {
-                //Handle success...
-                console.log(response);
-                setUserData(response);
-            })
-            .catch(error => {
-                if (error.response && error.response.data) {
-                    console.error('Error getting user details...:', error.response.data);
-                    setErrorMessage("Error getting user details...");
-                }
-            })
-    }, [])
+    const navigate = useNavigate(); 
+
+        useEffect(() => {
+            getUser(userID)
+                .then(response => {
+                    //Handle success...
+                    console.log(response);
+                    setUserData(response);
+                    if (!response.avatar || !response.partnerPokemon) {
+                        navigate("/create-profile", { state: { id: userID }});
+                    }
+                })
+                .catch(error => {
+                    if (error.response && error.response.data) {
+                        console.error('Error getting user details...:', error.response.data);
+                        setErrorMessage("Error getting user details...");
+                    }
+                })
+        }, [])
     
 
     const foundAvatar = avatars.find(avatar => avatar.name === userData.avatar);
     const foundPartner = partners.find(partner => partner.name === userData.partnerPokemon);
-
 
     return (
         <div>

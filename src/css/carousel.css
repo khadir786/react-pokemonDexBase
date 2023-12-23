@@ -1,0 +1,9 @@
+.carousel {
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  .carousel img {
+    max-width: 100%;
+    height: auto;
+  }

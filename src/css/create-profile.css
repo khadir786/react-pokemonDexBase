@@ -1,42 +1,35 @@
-/* create-profile.css */
-
-/* PageContainer styles */
 .PageContainer {
     min-height: 100vh; /* Ensure the page fills the viewport height */
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
   }
-  
-  /* ProfileTitle styles */
+
   .ProfileTitle {
-    font-size: 2rem; /* Adjust the font size as needed */
-    margin-bottom: 20px; /* Add spacing below the title */
+    font-size: 2rem; 
+    margin-bottom: 20px; 
   }
-  
-  /* CreateProfileContainer styles */
+
   .CreateProfileContainer {
-    background-color: #fff; /* Set your desired background color */
+    background-color: rgb(33, 45, 58); 
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
     padding: 20px;
     max-width: 800px;
     width: 100%;
     text-align: center;
     margin: 10px;
+    max-height: 730px;
   }
   
-  /* SectionTitle styles */
   .SectionTitle {
-    font-size: 1.5rem; /* Adjust the font size as needed */
-    margin-bottom: 10px; /* Add spacing below section titles */
+    font-size: 1.5rem; 
+    margin-bottom: 10px; 
   }
   
-  /* Profile-AvatarContainer and Profile-PartnerContainer styles */
   .Profile-AvatarContainer,
   .Profile-PartnerContainer {
-    margin-top: 20px; /* Add spacing between sections */
+    max-width: fit-content;
   }
-  
-  /* You can customize the styles further to match your design */
   

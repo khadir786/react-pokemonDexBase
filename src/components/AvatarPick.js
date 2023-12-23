@@ -68,6 +68,7 @@ export default function TrainerImageGallery() {
       <ReactModal
         isOpen={selectedModalImage !== null}
         onRequestClose={closeModal}
+        appElement={document.getElementById('root')}
         ariaHideApp={false}
         className="modal"
       >

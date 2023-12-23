@@ -3,6 +3,7 @@ import Header from "./Header";
 import '../css/home-user.css';
 import { useLocation } from "react-router-dom";
 import Partners from "./data/PartnerData.js";
+import Avatars from "./data/TrainerSpriteNames.js";
 import { getUser } from "../apiService.js";
 
 // Any time the user is redirected, userID must be passed along with it. 
@@ -14,8 +15,8 @@ export default function HomeUser() {
     const [errorMessage, setErrorMessage] = useState("");
     const location = useLocation();
     const userID = location.state?.id;
+    const avatars = Avatars.data.trainers;
     const partners = Partners.data.partner;
-
     useEffect(() => {
         getUser(userID)
             .then(response => {
@@ -32,6 +33,7 @@ export default function HomeUser() {
     }, [])
     
 
+    const foundAvatar = avatars.find(avatar => avatar.name === userData.avatar);
     const foundPartner = partners.find(partner => partner.name === userData.partnerPokemon);
 
 
@@ -40,6 +42,12 @@ export default function HomeUser() {
             <Header />
             <div className="user-content">
                 {userData && <h1>Welcome, {userData.username}</h1>}
+                {foundAvatar &&
+                    <div className="user-avatar">
+                        <h1>Avatar: {foundAvatar.name}</h1>
+                        <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar"/>
+                    </div>
+                }
                 {foundPartner &&
                     <div className="user-partner">
                         <h1>Partner Pokemon: {foundPartner.name}</h1>

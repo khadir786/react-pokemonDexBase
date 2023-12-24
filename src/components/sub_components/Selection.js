@@ -19,7 +19,7 @@ const Selection = ({ images }) => {
     console.log('Image Name:', images[selectedIndex].name);
     setActiveIndex(selectedIndex);
   };
-  
+
   const typeWriter = (text) => {
     let i = 0;
     const speed = 20;
@@ -42,7 +42,7 @@ const Selection = ({ images }) => {
       element.innerHTML = '';
       element.classList.remove('active');
     });
-    
+
     const dexEntryElements = document.querySelectorAll('.dexEntry');
     dexEntryElements[activeIndex].classList.add('active');
     typeWriter(activeEntry); // Start the animation with the new dexEntry text
@@ -63,7 +63,7 @@ const Selection = ({ images }) => {
           ))}
         </div>
       </div>
-      <div className="carousel-container">
+      <div className="pokemon-carousel-container">
         <Carousel
           activeIndex={activeIndex}
           onSelect={handleSelectSlide}
@@ -74,7 +74,7 @@ const Selection = ({ images }) => {
         >
           {images.map((image, index) => (
             <Carousel.Item key={index}>
-              <img src={image.officialImage} alt={`${image.name}`} />
+              <img className="pokemonImage" src={image.officialImage} alt={`${image.name}`} />
               <h3 className='pokemonName'>{image.name}</h3>
               <div className="dexContainer">
                 <p className={`dexEntry ${index === activeIndex ? 'active' : ''}`}></p>

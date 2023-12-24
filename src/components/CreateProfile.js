@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
@@ -9,8 +10,18 @@ import "../css/create-profile.css";
 import "../css/carousel.css";
 
 export default function CreateProfile() {
+    const location = useLocation();
+    const userID = location.state?.id;
     const [activeIndex, setActiveIndex] = useState(0);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [userData, setUserData] = useState(
+        {
+            id: userID,
+            avatar: 'red-gen2',
+            partnerPokemon: null
+        })
+
+    console.log(userData);
 
     const handleToggleExpansion = () => {
         setIsExpanded(!isExpanded);
@@ -40,7 +51,7 @@ export default function CreateProfile() {
             <div
                 className={`CreateProfileContainer ${isExpanded ? 'expanded' : ''}`}
             >
-                <h1 className="ProfileTitle">Create Your Profile</h1>
+                <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">
                     <Carousel
                         activeIndex={activeIndex}
@@ -53,19 +64,19 @@ export default function CreateProfile() {
                         <Carousel.Item key={0}>
                             <div className="Profile-AvatarContainer">
                                 <h2 className="SectionTitle">Select Your Avatar</h2>
-                                <AvatarPick />
+                                <AvatarPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
                         <Carousel.Item key={1}>
                             <div className="Profile-PartnerContainer">
                                 <h2 className="SectionTitle">Select Your Partner Pokemon</h2>
-                                <PartnerPick />
+                                <PartnerPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
                     </Carousel>
                 </div>
                 {activeIndex === 0 ? <Button variant="primary" onClick={toggleActiveIndex}>Next</Button> :
-                <Button variant="outline-secondary" onClick={toggleActiveIndex}>Back</Button>}
+                    <Button variant="outline-secondary" onClick={toggleActiveIndex}>Back</Button>}
             </div>
         </div>
     );

@@ -4,7 +4,7 @@ import ReactModal from "react-modal";
 import ReactPaginate from "react-paginate";
 import '../css/avatar.css';
 
-export default function TrainerImageGallery() {
+export default function TrainerImageGallery({ userData, setUserData }) {
   const trainers = TrainerSprites.data.trainers;
   const itemsPerPage = 20; // Number of items per page
   const [currentPage, setCurrentPage] = useState(0);
@@ -16,6 +16,7 @@ export default function TrainerImageGallery() {
   };
 
   const openModal = (trainerName) => {
+
     setSelectedModalImage(trainerName);
   };
 
@@ -32,6 +33,10 @@ export default function TrainerImageGallery() {
     return currentTrainers.map((trainer) => (
       <li key={trainer.name} onClick={() => {
         setSelectedImage(trainer.name);
+        setUserData(prevUserData => ({
+          ...prevUserData,
+          avatar: trainer.name
+        }));
       }
       }>
         <img

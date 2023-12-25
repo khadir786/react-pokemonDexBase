@@ -55,7 +55,7 @@ export default function CreateProfile() {
             <div
                 className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar'
                     : activeIndex === 1 ? 'partner'
-                        : 'confirm'}`}
+                        : 'confirmation'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">

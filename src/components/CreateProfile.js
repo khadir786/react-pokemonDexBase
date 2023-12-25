@@ -28,12 +28,23 @@ export default function CreateProfile() {
         setActiveIndex(selectedIndex);
     };
 
-    const toggleActiveIndex = () => {
-        if (activeIndex === 1) {
-            return setActiveIndex(0);
+    const goNext = () => {
+        console.log("go next");
+        if (activeIndex === 0) {
+            return setActiveIndex(1);
 
         } else {
+            return setActiveIndex(2);
+        }
+    }
+
+    const goBack = () => {
+        console.log("go back");
+        if (activeIndex === 2) {
             return setActiveIndex(1);
+
+        } else {
+            return setActiveIndex(0);
         }
     }
 
@@ -42,9 +53,9 @@ export default function CreateProfile() {
         <div className={`PageContainer`}>
             <Header />
             <div
-                className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar' 
-                : activeIndex === 1 ? 'partner' 
-                : 'confirm'}`}
+                className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar'
+                    : activeIndex === 1 ? 'partner'
+                        : 'confirm'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">
@@ -68,10 +79,22 @@ export default function CreateProfile() {
                                 <PartnerPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
+                        <Carousel.Item key={2}>
+                            <div className="Profile-ConfirmContainer">
+                                <h2 className="SectionTitle">Confirm</h2>
+                                <p>[confirmation component]</p>
+                            </div>
+                        </Carousel.Item>
                     </Carousel>
                 </div>
-                {activeIndex === 0 ? <Button variant="primary" onClick={toggleActiveIndex}>Next</Button> :
-                    <Button variant="outline-secondary" onClick={toggleActiveIndex}>Back</Button>}
+                {
+                    activeIndex === 0 ? <Button variant="primary" onClick={goNext}>Next</Button> :
+                        <div className="ProfileButtons">
+                            <Button variant="outline-secondary" onClick={goBack}>Back</Button>
+                            {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
+                                : <Button variant="primary" onClick={''}>Confirm</Button>}
+                        </div>
+                }
             </div>
         </div>
     );

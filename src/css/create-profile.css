@@ -15,7 +15,7 @@
 .CreateProfileContainer {
     background-color: rgb(33, 45, 58);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     padding: 20px;
     max-width: 800px;
     width: 100%;
@@ -44,4 +44,9 @@
 .Profile-AvatarContainer,
 .Profile-PartnerContainer {
     max-width: 100%;
+}
+
+.ProfileButtons {
+    display: flex;
+    justify-content: space-around;
 }

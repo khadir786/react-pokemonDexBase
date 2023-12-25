@@ -8,7 +8,7 @@ export default function TrainerImageGallery({ userData, setUserData }) {
   const trainers = TrainerSprites.data.trainers;
   const itemsPerPage = 20; // Number of items per page
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(trainers[0].name);
+  const [selectedImage, setSelectedImage] = useState('red-gen2');
   const [selectedModalImage, setSelectedModalImage] = useState(null);
 
   const handlePageClick = ({ selected }) => {

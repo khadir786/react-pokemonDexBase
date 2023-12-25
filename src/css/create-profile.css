@@ -22,14 +22,18 @@
     text-align: center;
     margin: 10px;
     overflow: hidden;
-    height: 710px;
     max-height: auto;
     transition: height 0.8s;
 }
 
-.CreateProfileContainer.expanded {
+.CreateProfileContainer.avatar {
+    height: 710px;
+}
+.CreateProfileContainer.partner {
     height: 895px;
-    max-height: auto;
+}
+.CreateProfileContainer.confirmation {
+    height: 895px;
 }
 
 .SectionTitle {

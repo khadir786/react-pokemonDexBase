@@ -13,7 +13,6 @@ export default function CreateProfile() {
     const location = useLocation();
     const userID = location.state?.id;
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isExpanded, setIsExpanded] = useState(false);
     const [userData, setUserData] = useState(
         {
             id: userID,
@@ -23,33 +22,29 @@ export default function CreateProfile() {
 
     console.log(userData);
 
-    const handleToggleExpansion = () => {
-        setIsExpanded(!isExpanded);
-    };
 
     const handleSelectSlide = (selectedIndex) => {
         console.log('Selected Index:', selectedIndex);
         setActiveIndex(selectedIndex);
-        handleToggleExpansion();
     };
 
     const toggleActiveIndex = () => {
         if (activeIndex === 1) {
-            handleToggleExpansion();
             return setActiveIndex(0);
 
         } else {
-            handleToggleExpansion();
             return setActiveIndex(1);
         }
     }
 
     console.log("Active index:" + activeIndex);
     return (
-        <div className={`PageContainer ${isExpanded ? 'expanded' : ''}`}>
+        <div className={`PageContainer`}>
             <Header />
             <div
-                className={`CreateProfileContainer ${isExpanded ? 'expanded' : ''}`}
+                className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar' 
+                : activeIndex === 1 ? 'partner' 
+                : 'confirm'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">

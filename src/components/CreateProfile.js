@@ -5,6 +5,7 @@ import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
+import Confirmation from "./Confirmation";
 
 import "../css/create-profile.css";
 import "../css/carousel.css";
@@ -82,7 +83,11 @@ export default function CreateProfile() {
                         <Carousel.Item key={2}>
                             <div className="Profile-ConfirmContainer">
                                 <h2 className="SectionTitle">Confirm</h2>
-                                <p>[confirmation component]</p>
+                                <Confirmation
+                                    userData={userData}
+                                    username={location.state?.username}
+                                    activeIndex={activeIndex}
+                                    setActiveIndex={setActiveIndex} />
                             </div>
                         </Carousel.Item>
                     </Carousel>
@@ -92,7 +97,7 @@ export default function CreateProfile() {
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
                             {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
-                                : <Button variant="primary" onClick={''}>Confirm</Button>}
+                                : <Button variant="primary" onClick={() => {}}>Confirm</Button>}
                         </div>
                 }
             </div>

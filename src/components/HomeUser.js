@@ -19,26 +19,26 @@ export default function HomeUser() {
     const userID = location.state?.id;
     const avatars = Avatars.data.trainers;
     const partners = Partners.data.partner;
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
-        useEffect(() => {
-            getUser(userID)
-                .then(response => {
-                    //Handle success...
-                    console.log(response);
-                    setUserData(response);
-                    if (!response.avatar || !response.partnerPokemon) {
-                        navigate("/create-profile", { state: { id: userID }});
-                    }
-                })
-                .catch(error => {
-                    if (error.response && error.response.data) {
-                        console.error('Error getting user details...:', error.response.data);
-                        setErrorMessage("Error getting user details...");
-                    }
-                })
-        }, [])
-    
+    useEffect(() => {
+        getUser(userID)
+            .then(response => {
+                //Handle success...
+                console.log(response);
+                setUserData(response);
+                if (!response.avatar || !response.partnerPokemon) {
+                    navigate("/create-profile", { state: { id: userID, username: location.state?.username } });
+                }
+            })
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    console.error('Error getting user details...:', error.response.data);
+                    setErrorMessage("Error getting user details...");
+                }
+            })
+    }, [])
+
 
     const foundAvatar = avatars.find(avatar => avatar.name === userData.avatar);
     const foundPartner = partners.find(partner => partner.name === userData.partnerPokemon);
@@ -51,13 +51,13 @@ export default function HomeUser() {
                 {foundAvatar &&
                     <div className="user-avatar">
                         <h1>Avatar: {foundAvatar.name}</h1>
-                        <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar"/>
+                        <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
                     </div>
                 }
                 {foundPartner &&
                     <div className="user-partner">
                         <h1>Partner Pokemon: {foundPartner.name}</h1>
-                        <img src={foundPartner.image} alt="Partner Pokemon"/>
+                        <img src={foundPartner.image} alt="Partner Pokemon" />
                     </div>
                 }
                 {errorMessage && <div className="error">{errorMessage}</div>}

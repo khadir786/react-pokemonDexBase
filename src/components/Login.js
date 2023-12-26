@@ -61,7 +61,7 @@ export default function Login() {
             .then(response => {
                 console.log('Login successful:', response);
                 // Handle success...
-                navigate('/home', { state: { id: response.id } })
+                navigate('/home', { state: { id: response.id, username: response.username } })
             })
             .catch(error => {
                 if (error.response && error.response.data) {

@@ -16,7 +16,7 @@ export default function PartnerPick({ userData, setUserData }) {
             setActivePokemon(pokemon.name);
             setUserData(prevUserData => ({
                 ...prevUserData,
-                partnerPokemon: pokemon.name
+                partnerPokemon: pokemon
             }))
             setActiveEntry(pokemon.dexEntry);
         };

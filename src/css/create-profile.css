@@ -57,3 +57,11 @@
     justify-content: center;
     flex-direction: column;
 }
+
+.Confirmation-officialImage {
+    width: 60%;
+}
+
+.Confirmation-spriteContainer:hover{
+    cursor: pointer;
+}

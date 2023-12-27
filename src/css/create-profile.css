@@ -50,3 +50,10 @@
     display: flex;
     justify-content: space-around;
 }
+
+.Confirmation-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

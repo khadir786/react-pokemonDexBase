@@ -59,13 +59,13 @@ export default function PartnerPick({ userData, setUserData }) {
             <div className="Selection" ref={containerRef}>
                 <div className="selection-container">
                     <div className="previews">
-                        {partners.map((image, index) => (
+                        {partners.map((pokemon, index) => (
                             <div
                                 key={index}
                                 className={`preview ${index === activeIndex ? 'active' : 'notActive'}`}
-                                onClick={() => handlePreviewClick(index, image)}
+                                onClick={() => handlePreviewClick(index, pokemon)}
                             >
-                                <img src={image.image} alt={`${index}`} />
+                                <img src={pokemon.image} alt={`${index}`} />
                             </div>
                         ))}
                     </div>
@@ -79,10 +79,10 @@ export default function PartnerPick({ userData, setUserData }) {
                         keyboard={true}
                         controls={false}
                     >
-                        {partners.map((image, index) => (
+                        {partners.map((pokemon, index) => (
                             <Carousel.Item key={index}>
-                                <img className="pokemonImage" src={image.officialImage} alt={`${image.name}`} />
-                                <h3 className='pokemonName'>{image.name}</h3>
+                                <img className="pokemonImage" src={pokemon.officialImage} alt={`${pokemon.name}`} />
+                                <h3 className='pokemonName'>{pokemon.name}</h3>
                                 <div className="dexContainer">
                                     <p className={`dexEntry ${index === activeIndex ? 'active' : ''}`}></p>
                                 </div>

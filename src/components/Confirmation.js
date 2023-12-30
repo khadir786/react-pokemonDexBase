@@ -33,7 +33,6 @@ export default function Confirmation({ userData, username, activeIndex, setActiv
           className="Confirmation-officialImage"
           src={userData.partnerPokemon?.officialImage}
           alt={userData.partnerPokemon?.name}
-          onClick={() => (setActiveIndex(1))}
         />
       </div>
     </div>

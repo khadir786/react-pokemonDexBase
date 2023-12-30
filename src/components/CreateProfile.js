@@ -6,6 +6,7 @@ import PartnerPick from "./PartnerPick";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Confirmation from "./Confirmation";
+import { updateUser } from "../apiService";
 
 import "../css/create-profile.css";
 import "../css/carousel.css";
@@ -16,7 +17,6 @@ export default function CreateProfile() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [userData, setUserData] = useState(
         {
-            id: userID,
             avatar: 'red-gen2',
             partnerPokemon: null
         })
@@ -47,6 +47,16 @@ export default function CreateProfile() {
         } else {
             return setActiveIndex(0);
         }
+    }
+
+    const handleConfirm = async (userID, userData) => {
+        const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name }
+        updateUser(userID, request)
+            .then((response) => console.log(response)
+            )
+            .catch(error => {
+                console.log("Update failed: ", error)
+            })
     }
 
     console.log("Active index:" + activeIndex);
@@ -97,7 +107,7 @@ export default function CreateProfile() {
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
                             {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
-                                : <Button variant="primary" onClick={() => {}}>Confirm</Button>}
+                                : <Button variant="primary" onClick={() => { handleConfirm(userID, userData) }}>Confirm</Button>}
                         </div>
                 }
             </div>

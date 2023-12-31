@@ -49,6 +49,7 @@ export const loginUser = async (username, password) => {
 
     try {
         const response = await axios.post(`${API_BASE_URL}/api/auth/login`, params, {
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
@@ -59,3 +60,13 @@ export const loginUser = async (username, password) => {
         throw error;
     }
 };
+
+export const logoutUser = async () => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, {withCredentials: true});
+        return response;
+    }
+    catch (error) {
+        throw error;
+    }
+}

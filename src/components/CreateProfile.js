@@ -62,7 +62,7 @@ export default function CreateProfile() {
     console.log("Active index:" + activeIndex);
     return (
         <div className={`PageContainer`}>
-            <Header />
+            <Header logged={true} />
             <div
                 className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar'
                     : activeIndex === 1 ? 'partner'

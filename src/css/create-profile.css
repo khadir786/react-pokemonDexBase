@@ -7,6 +7,26 @@
     color: white;
 }
 
+.headerLogged {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(33, 45, 58);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    
+
+}
+
+.headerLogged img {
+    width: 20%;
+    margin-right: auto;
+}
+
+.LogoutButton {
+
+}
+
 .ProfileTitle {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -29,9 +49,11 @@
 .CreateProfileContainer.avatar {
     height: 710px;
 }
+
 .CreateProfileContainer.partner {
     height: 895px;
 }
+
 .CreateProfileContainer.confirmation {
     height: 895px;
 }
@@ -62,6 +84,6 @@
     width: 60%;
 }
 
-.Confirmation-spriteContainer:hover{
+.Confirmation-spriteContainer:hover {
     cursor: pointer;
 }

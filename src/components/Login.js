@@ -10,7 +10,7 @@ import ModalComp from "./sub_components/ModalComp";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Login() {
+export default function Login({ isLoggedIn, setIsLoggedIn }) {
     const navigate = useNavigate();
 
     const [isLoginVisible, setIsLoginVisible] = useState(false);
@@ -61,6 +61,7 @@ export default function Login() {
             .then(response => {
                 console.log('Login successful:', response);
                 // Handle success...
+                setIsLoggedIn(true);
                 navigate('/home', { state: { id: response.id, username: response.username } })
             })
             .catch(error => {
@@ -68,7 +69,7 @@ export default function Login() {
                     console.error('Login failed:', error.response.data);
                     setErrorMessage(prevErrorMessage => {
                         return {
-                            type:"error",
+                            type: "error",
                             message: error.response.data,
                             heading: "Login failed..."
                         }

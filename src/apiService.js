@@ -4,7 +4,7 @@ const API_BASE_URL = 'http://localhost:8080';
 
 export const getAllUsers = async () => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/api/users`);
+        const response = await axios.get(`${API_BASE_URL}/api/users`, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error('Error fetching users:', error);
@@ -14,17 +14,17 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id) => {
     try {
-        const response = await axios.get(`${API_BASE_URL}/api/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/${id}`, { withCredentials: true });
         return response.data;
     } catch (error) {
-        console.error('Error fetching user:', error);
+        // console.error('Error fetching user:', error);
         throw error;
     }
 };
 
 export const updateUser = async (id, userData) => {
     try {
-        const response = await axios.put(`${API_BASE_URL}/api/${id}`, userData);
+        const response = await axios.put(`${API_BASE_URL}/api/${id}`, userData, { withCredentials: true });
         return response.data;
     } catch (error) {
         console.error("Error updating user:", error);
@@ -63,7 +63,7 @@ export const loginUser = async (username, password) => {
 
 export const logoutUser = async () => {
     try {
-        const response = await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, {withCredentials: true});
+        const response = await axios.post(`${API_BASE_URL}/api/auth/logout`, {}, { withCredentials: true });
         return response;
     }
     catch (error) {

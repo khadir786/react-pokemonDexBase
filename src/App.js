@@ -26,7 +26,7 @@ function App() {
   // adjust login and logout accordingly
   // if user decides to change the flag manually, just log them out
 
-  console.log(isLoggedIn);
+  console.log("Logged in: " + isLoggedIn);
 
   return (
     <Router>

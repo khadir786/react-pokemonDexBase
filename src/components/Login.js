@@ -61,6 +61,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
             .then(response => {
                 console.log('Login successful:', response);
                 // Handle success...
+                localStorage.setItem('isLoggedIn', 'true');
                 setIsLoggedIn(true);
                 navigate('/home', { state: { id: response.id, username: response.username } })
             })

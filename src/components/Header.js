@@ -23,9 +23,9 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
     };
 
     return (
-        <nav style={{ width: '100%' }} className={logged ? "headerLogged" : "header"}>
+        <nav style={{ width: '100%' }} className={isLoggedIn ? "headerLogged" : "header"}>
             <img className="Logo" alt="logo" src={logo} />
-            {logged &&
+            {isLoggedIn &&
                 <Button variant="secondary" className="LogoutButton" onClick={handleLogout}>Logout</Button>}
         </nav>
 

@@ -11,7 +11,7 @@ import { updateUser } from "../apiService";
 import "../css/create-profile.css";
 import "../css/carousel.css";
 
-export default function CreateProfile() {
+export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const location = useLocation();
     const userID = location.state?.id;
     const [activeIndex, setActiveIndex] = useState(0);
@@ -62,7 +62,7 @@ export default function CreateProfile() {
     console.log("Active index:" + activeIndex);
     return (
         <div className={`PageContainer`}>
-            <Header logged={true} />
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} logged={true} />
             <div
                 className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar'
                     : activeIndex === 1 ? 'partner'

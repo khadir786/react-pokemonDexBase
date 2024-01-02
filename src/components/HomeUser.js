@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 // And then in the new page, if redirected back to the original, that userID must be passed back
 // This is recieved through location
 
-export default function HomeUser() {
+export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
     const [userData, setUserData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
     const location = useLocation();
@@ -45,7 +45,7 @@ export default function HomeUser() {
 
     return (
         <div>
-            <Header />
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div className="user-content">
                 {userData && <h1>Welcome, {userData.username}</h1>}
                 {foundAvatar &&

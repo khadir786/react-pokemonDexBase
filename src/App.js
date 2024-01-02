@@ -13,7 +13,18 @@ import CreateProfile from './components/CreateProfile';
 
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("isLoggedIn") === "true");
+
+  // potential changes were stashed but localStorage is stupid
+  // on a refresh, isLoggedin is false
+
+  // possible solution is more localStorage!!!!!!!!!!!!!!!!
+
+  // store isLoggedIn flag in localStorage
+  // initialise isLoggedIn state with whether or not isLoggedIn exists
+  // (localStorage.getItem('isLoggedIn') === "true")
+  // adjust login and logout accordingly
+  // if user decides to change the flag manually, just log them out
 
   console.log(isLoggedIn);
 
@@ -21,42 +32,42 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
-          <Route path="/register" element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
-          <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
+          <Route path="/" element={<Home isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/register" element={<Register isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/login" element={<Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
 
           {/* Protected Routes */}
-          <Route 
-            path="/home" 
+          <Route
+            path="/home"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                 <HomeUser />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/trainer" 
+          <Route
+            path="/trainer"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                 <TrainerImageGallery />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/partner" 
+          <Route
+            path="/partner"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                 <PartnerPick />
               </ProtectedRoute>
-            } 
+            }
           />
-          <Route 
-            path="/create-profile" 
+          <Route
+            path="/create-profile"
             element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                 <CreateProfile />
               </ProtectedRoute>
-            } 
+            }
           />
         </Routes>
       </div>

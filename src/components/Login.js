@@ -118,7 +118,6 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                         <LoadingButton type="submit" />
                     </form>
                     <p>Don't have an account? <span><Link to="/register">Register here </Link></span></p>
-                    <Link to="/home">Go to user home</Link>
                     {showModal && (
                         <ModalComp
                             type={errorMessage.type}

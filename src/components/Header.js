@@ -2,21 +2,24 @@ import React from "react"
 import logo from '../img/logo.png'
 import Button from 'react-bootstrap/Button';
 import { logoutUser } from "../apiService";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
 
-export default function Header({ logged }) {
+export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        try {
-            await logoutUser();
-            console.log("logout success");
-            logged = false;
-            navigate("/login");
-        } catch (error) {
-            console.log(error.toString());
-        }
-
+        logoutUser()
+            .then(response => {
+                console.log(response)
+                console.log("logout success");
+                localStorage.removeItem('isLoggedIn');
+                setIsLoggedIn(false);
+                
+                logged = false;
+                navigate("/login");
+            })
+            .catch(error => {console.log(error.toString())})
     };
 
     return (

@@ -1,43 +1,56 @@
 import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import '../css/home-user.css';
-import { useLocation } from "react-router-dom";
-import Partners from "./data/PartnerData.js";
 import Avatars from "./data/TrainerSpriteNames.js";
-import { getUser } from "../apiService.js";
+import Partners from "./data/PartnerData.js";
+import Header from "./Header";
+import { useLocation } from "react-router-dom";
+import { getUser, logoutUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
-
-
-// Any time the user is redirected, userID must be passed along with it. 
-// And then in the new page, if redirected back to the original, that userID must be passed back
-// This is recieved through location
+import { useUser } from "./UseContext.js";
+import '../css/home-user.css';
 
 export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
     const [userData, setUserData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
     const location = useLocation();
-    const userID = location.state?.id;
     const avatars = Avatars.data.trainers;
     const partners = Partners.data.partner;
     const navigate = useNavigate();
+    const { isLoading, user, logout } = useUser();
 
     useEffect(() => {
-        getUser(userID)
-            .then(response => {
-                //Handle success...
-                console.log(response);
-                setUserData(response);
-                if (!response.avatar || !response.partnerPokemon) {
-                    navigate("/create-profile", { state: { id: userID, username: location.state?.username } });
-                }
-            })
-            .catch(error => {
-                if (error.response && error.response.data) {
-                    console.error('Error getting user details...:', error.response.data);
-                    setErrorMessage("Error getting user details...");
-                }
-            })
-    }, [])
+        if (!isLoading) {
+            if (user) {
+                const userID = user.id;
+                getUser(userID)
+                    .then(response => {
+                        //Handle success...
+                        console.log(response);
+                        setUserData(response);
+                        if (!response.avatar || !response.partnerPokemon) {
+                            navigate("/create-profile", { state: { id: userID, username: location.state?.username } });
+                        }
+                    })
+                    .catch(error => {
+                        if (error.response && error.response.data) {
+                            console.error('Error getting user details...:', error.response.data);
+                            setErrorMessage("Error getting user details...");
+                        }
+                    })
+            } else {
+                logoutUser()
+                    .then(response => {
+                        console.log(response)
+                        console.log("logout success");
+                    })
+                    .catch(error => { console.log(error.toString()) })
+                    .finally(() => {
+                        logout();
+                        setIsLoggedIn(false);
+                        navigate("/login");
+                    })
+            }
+        }
+    }, [user, isLoading])
 
 
     const foundAvatar = avatars.find(avatar => avatar.name === userData.avatar);

@@ -70,3 +70,12 @@ export const logoutUser = async () => {
         throw error;
     }
 }
+
+export const getUserInfo = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/api/auth/userinfo`, { withCredentials: true });
+        return response;
+    } catch (error) {
+        throw error;
+    }
+}

@@ -3,23 +3,24 @@ import logo from '../img/logo.png'
 import Button from 'react-bootstrap/Button';
 import { logoutUser } from "../apiService";
 import { useNavigate } from "react-router-dom";
-import { responsivePropType } from "react-bootstrap/esm/createUtilityClasses";
+import { useUser } from "./UseContext";
 
 export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
     const navigate = useNavigate();
+    const { logout } = useUser();
 
     const handleLogout = async () => {
         logoutUser()
             .then(response => {
                 console.log(response)
                 console.log("logout success");
-                localStorage.removeItem('isLoggedIn');
+            })
+            .catch(error => { console.log(error.toString()) })
+            .finally(() => {
+                logout();
                 setIsLoggedIn(false);
-                
-                logged = false;
                 navigate("/login");
             })
-            .catch(error => {console.log(error.toString())})
     };
 
     return (

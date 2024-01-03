@@ -10,7 +10,6 @@ export const UserProvider = ({ children }) => {
     const login = (userData) => {
         setUser(userData);
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userId', userData.id);
     };
 
     const logout = () => {

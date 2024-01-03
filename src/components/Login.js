@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
-import { CSSTransition } from 'react-transition-group';
-import '../css/register-login.css';
-import '../css/rl-transitions.css';
+import ModalComp from "./sub_components/ModalComp";
 import Header from "./Header";
+import { CSSTransition } from 'react-transition-group';
 import { Link } from "react-router-dom";
 import { loginUser } from "../apiService";
-import ModalComp from "./sub_components/ModalComp";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./UseContext";
+import '../css/register-login.css';
+import '../css/rl-transitions.css';
 
 
 export default function Login({ isLoggedIn, setIsLoggedIn }) {
@@ -18,6 +19,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const loginRef = useRef(null);
+    const { login } = useUser();
 
 
     const [formData, setFormData] = useState(
@@ -61,9 +63,9 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
             .then(response => {
                 console.log('Login successful:', response);
                 // Handle success...
-                localStorage.setItem('isLoggedIn', 'true');
+                login(response);
                 setIsLoggedIn(true);
-                navigate('/home', { state: { id: response.id, username: response.username } })
+                navigate('/home')
             })
             .catch(error => {
                 if (error.response && error.response.data) {

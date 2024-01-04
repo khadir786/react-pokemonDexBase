@@ -23,7 +23,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
                 const userID = user.id;
                 getUser(userID)
                     .then(response => {
-                        //Handle success...
+                        // Handle success...
                         console.log(response);
                         setUserData(response);
                         if (!response.avatar || !response.partnerPokemon) {
@@ -52,27 +52,30 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
         }
     }, [user, isLoading])
 
-
     const foundAvatar = avatars.find(avatar => avatar.name === userData.avatar);
     const foundPartner = partners.find(partner => partner.name === userData.partnerPokemon);
 
     return (
-        <div>
+        <div className="home-user">
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div className="user-content">
-                {userData && <h1>Welcome, {userData.username}</h1>}
-                {foundAvatar &&
-                    <div className="user-avatar">
-                        <h1>Avatar: {foundAvatar.name}</h1>
-                        <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
+                {userData && (
+                    <div className="user-info">
+                        <h1 className="user-welcome">Welcome, {userData.username}</h1>
+                        {foundAvatar && (
+                            <div className="user-avatar">
+                                <h2>Avatar: {foundAvatar.name}</h2>
+                                <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
+                            </div>
+                        )}
+                        {foundPartner && (
+                            <div className="user-partner">
+                                <h2>Partner Pokemon: {foundPartner.name}</h2>
+                                <img src={foundPartner.image} alt="Partner Pokemon" />
+                            </div>
+                        )}
                     </div>
-                }
-                {foundPartner &&
-                    <div className="user-partner">
-                        <h1>Partner Pokemon: {foundPartner.name}</h1>
-                        <img src={foundPartner.image} alt="Partner Pokemon" />
-                    </div>
-                }
+                )}
                 {errorMessage && <div className="error">{errorMessage}</div>}
             </div>
         </div>

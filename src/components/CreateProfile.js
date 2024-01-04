@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { updateUser } from "../apiService";
 import Header from "./Header";
 import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Confirmation from "./Confirmation";
-import { updateUser } from "../apiService";
 
 import "../css/create-profile.css";
 import "../css/carousel.css";
@@ -14,6 +14,7 @@ import "../css/carousel.css";
 export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const location = useLocation();
     const userID = location.state?.id;
+    const navigate = useNavigate();
     const [activeIndex, setActiveIndex] = useState(0);
     const [userData, setUserData] = useState(
         {
@@ -107,7 +108,10 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
                             {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
-                                : <Button variant="primary" onClick={() => { handleConfirm(userID, userData) }}>Confirm</Button>}
+                                : <Button variant="primary" onClick={() => {
+                                    handleConfirm(userID, userData);
+                                    navigate('/home');
+                                }}>Confirm</Button>}
                         </div>
                 }
             </div>

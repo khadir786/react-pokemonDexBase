@@ -73,7 +73,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
                             )}
                             {foundPartner && (
                                 <div className="user-partner">
-                                    <img src={foundPartner.image} alt="Partner Pokemon" />
+                                    <img className="preview" src={foundPartner.image} alt="Partner Pokemon" />
                                     <p className="avatar-caption">{foundPartner.name}</p>
                                 </div>
                             )}

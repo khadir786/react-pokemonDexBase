@@ -6,6 +6,8 @@ import { useLocation } from "react-router-dom";
 import { getUser, logoutUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext.js";
+import Dots from "react-activity/dist/Dots";
+import "react-activity/dist/Dots.css";
 import '../css/home-user.css';
 
 export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
@@ -59,23 +61,26 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
         <div className="home-user">
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div className="user-content">
-                {userData && (
-                    <div className="user-info">
-                        <h1 className="user-welcome">Welcome, {userData.username}</h1>
-                        {foundAvatar && (
-                            <div className="user-avatar">
-                                <h2>Avatar: {foundAvatar.name}</h2>
-                                <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
-                            </div>
-                        )}
-                        {foundPartner && (
-                            <div className="user-partner">
-                                <h2>Partner Pokemon: {foundPartner.name}</h2>
-                                <img src={foundPartner.image} alt="Partner Pokemon" />
-                            </div>
-                        )}
-                    </div>
-                )}
+                <h1 className="user-welcome">Welcome!</h1>
+                {isLoading === false ? 
+                    <div className="user-info-container">
+                        <div className="user-info">
+                            {foundAvatar && (
+                                <div className="user-avatar">
+                                    <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
+                                    <p className="avatar-caption">{userData.username}</p>
+                                </div>
+                            )}
+                            {foundPartner && (
+                                <div className="user-partner">
+                                    <img src={foundPartner.image} alt="Partner Pokemon" />
+                                    <p className="avatar-caption">{foundPartner.name}</p>
+                                </div>
+                            )}
+                        </div>
+                    </div> : <Dots />
+
+                }
                 {errorMessage && <div className="error">{errorMessage}</div>}
             </div>
         </div>

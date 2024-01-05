@@ -24,13 +24,12 @@
     width: 100%;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    /* Allow previews to wrap on smaller screens */
+    margin-bottom: 20px;
 }
 
 .preview {
     cursor: pointer;
     transition: transform 0.3s;
-    margin-bottom: 20px;
 }
 
 .preview img {

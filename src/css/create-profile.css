@@ -84,6 +84,10 @@
     width: 60%;
 }
 
+.Confirmation-spriteContainer {
+    margin-top: 15px;
+}
+
 .Confirmation-spriteContainer:hover {
     cursor: pointer;
 }

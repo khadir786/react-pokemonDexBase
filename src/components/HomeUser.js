@@ -90,7 +90,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
                                     />
                                     <p className="avatar-caption">{foundPartner.name}</p>
                                     <Collapse in={openEntry}>
-                                        <div id="dexEntry">
+                                        <div id={`dexEntry${openEntry === true ? '-active' : ''}`}>
                                             {foundPartner.dexEntry}
                                         </div>
                                     </Collapse>

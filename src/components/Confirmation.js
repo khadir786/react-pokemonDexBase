@@ -20,6 +20,7 @@ export default function Confirmation({ userData, username, activeIndex, setActiv
       </div>
       <div className="Confirmation-spriteContainer">
         <img
+          className="Confirmation-sprite"
           src={userData.partnerPokemon?.image}
           alt={userData.partnerPokemon?.name}
           onClick={() => (setActiveIndex(1))}

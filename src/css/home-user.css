@@ -1,9 +1,13 @@
-html, body {
-    margin: 0; /* Remove default margin */
-    padding: 0; /* Remove default padding */
+html,
+body {
+    margin: 0;
+    /* Remove default margin */
+    padding: 0;
+    /* Remove default padding */
     height: 100%;
     width: 100%;
 }
+
 .header {
     display: flex;
     align-items: center;
@@ -11,17 +15,73 @@ html, body {
     /* padding-bottom: 0px; */
 }
 
+.home-user {
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
 .user-content {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    color: white;
 }
 
+.user-info-container {
+    background-color: rgb(33, 45, 58);
+    border-radius: 8px;
+    width: 200px;
+}
+
+.user-info {
+    margin: 10px;
+    background-color: rgb(33, 45, 58);
+    padding: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-welcome {
+    font-size: 24px;
+    margin: 10px;
+}
+
+.avatar-caption {
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.user-avatar {
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.user-avatar img {
+    max-width: 100px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.user-partner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.user-partner img {
+    max-width: 150px;
+}
+
+/* Styles for error messages */
 .error {
     color: red;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
 }
+
 
 /* .Logo {
     margin: 10px;

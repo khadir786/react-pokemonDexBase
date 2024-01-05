@@ -53,7 +53,10 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const handleConfirm = async (userID, userData) => {
         const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name }
         updateUser(userID, request)
-            .then((response) => console.log(response)
+            .then((response) => {
+                console.log(response);
+                navigate('/home');
+            }
             )
             .catch(error => {
                 console.log("Update failed: ", error)
@@ -110,7 +113,6 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                             {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
                                 : <Button variant="primary" onClick={() => {
                                     handleConfirm(userID, userData);
-                                    navigate('/home');
                                 }}>Confirm</Button>}
                         </div>
                 }

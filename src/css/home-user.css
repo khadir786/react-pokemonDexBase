@@ -68,6 +68,7 @@ body {
 .user-partner {
     margin-top: 20px;
     text-align: center;
+    cursor: pointer;
 }
 
 .user-partner img {

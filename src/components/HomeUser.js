@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Avatars from "./data/TrainerSpriteNames.js";
 import Partners from "./data/PartnerData.js";
 import Header from "./Header";
+import Collapse from 'react-bootstrap/Collapse';
 import { useLocation } from "react-router-dom";
 import { getUser, logoutUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ import '../css/home-user.css';
 export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
     const [userData, setUserData] = useState({});
     const [errorMessage, setErrorMessage] = useState("");
+    const [openEntry, setOpenEntry] = useState(false);
     const location = useLocation();
     const avatars = Avatars.data.trainers;
     const partners = Partners.data.partner;
@@ -61,20 +63,37 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
         <div className="home-user">
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
             <div className="user-content">
+
                 <h1 className="user-welcome">Welcome!</h1>
-                {isLoading === false ? 
+
+                {isLoading === false ?
                     <div className="user-info-container">
+
                         <div className="user-info">
+
                             {foundAvatar && (
                                 <div className="user-avatar">
                                     <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
                                     <p className="avatar-caption">{userData.username}</p>
                                 </div>
                             )}
+
                             {foundPartner && (
-                                <div className="user-partner">
-                                    <img className="preview" src={foundPartner.image} alt="Partner Pokemon" />
+                                <div className="user-partner"
+                                    onClick={() => setOpenEntry(!openEntry)}
+                                    aria-controls="dexEntry"
+                                    aria-expanded={openEntry}
+                                >
+                                    <img className="preview"
+                                        src={foundPartner.image}
+                                        alt="Partner Pokemon"
+                                    />
                                     <p className="avatar-caption">{foundPartner.name}</p>
+                                    <Collapse in={openEntry}>
+                                        <div id="dexEntry">
+                                            {foundPartner.dexEntry}
+                                        </div>
+                                    </Collapse>
                                 </div>
                             )}
                         </div>

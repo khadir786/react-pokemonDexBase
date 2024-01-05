@@ -28,14 +28,12 @@ body {
 }
 
 .user-info-container {
-    background-color: rgb(33, 45, 58);
     border-radius: 8px;
     width: 300px;
 }
 
 .user-info {
     margin: 10px;
-    background-color: rgb(33, 45, 58);
     padding: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -75,8 +73,10 @@ body {
 }
 
 .user-partner {
-    margin-top: 20px;
+    background-color: rgb(33, 45, 58);
+    margin-top: 10px;
     padding: 20px;
+    border-radius: 5%;
     text-align: center;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2) inset;

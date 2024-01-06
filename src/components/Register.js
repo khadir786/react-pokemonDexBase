@@ -48,7 +48,7 @@ export default function Register(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (!formData.username || !formData.username) {
+        if (!formData.username || !formData.password) {
             setErrorMessage(prevErrorMessage => {
                 return {
                     type: "warning",

@@ -1,0 +1,25 @@
+.carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pokemon-carousel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* border: solid;    
+    border-color: white;
+    border-radius: 10%; */
+}
+
+.carousel {
+    width: 100%;
+    max-width: 700px;
+  }
+  
+  .carousel img {
+    /* max-width: 80%; */
+  }

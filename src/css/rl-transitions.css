@@ -1,0 +1,47 @@
+/* Enter and Exit Transitions */
+/* CSS for box-shadow hover effect */
+.register-login {
+  box-shadow: 0px 0px 0px rgba(122, 109, 109, 0.7);
+  transition: box-shadow 0.3s ease-in-out;
+}
+.register-login:hover {
+  box-shadow: 0px 0px 10px rgba(122, 109, 109, 0.7);
+}
+
+/* CSS for welcome-fade */
+.welcome-fade-enter {
+  opacity: 0;
+}
+
+.welcome-fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+.welcome-fade-exit {
+  opacity: 1;
+}
+
+.welcome-fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+
+.welcome2-fade-enter {
+  opacity: 0;
+}
+
+.welcome2-fade-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-in-out;
+}
+
+.welcome2-fade-exit {
+  opacity: 1;
+}
+
+.welcome2-fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}

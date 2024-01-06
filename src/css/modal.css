@@ -1,0 +1,48 @@
+.error-modal {
+    color: #ffffff;
+}
+
+.error-modal .modal-header {
+    background-color: #a33838;
+}
+
+.error-modal .modal-body {
+    background-color: #2c2b40e9;
+}
+
+.warning-modal {
+    /* color: #7d1818; */
+    color: #ffffff;
+}
+
+.warning-modal .modal-header {  
+    background-color: #ffc107a7;
+}
+
+.warning-modal .modal-body {  
+    background-color: #2c2b40e9;
+}
+
+.success-modal {
+    color: #fff;
+
+}
+
+.success-modal .modal-header {
+    background-color: #28a745;
+
+}
+
+.success-modal .modal-body {
+    background-color: #2c2b40e9;
+
+}
+
+.custom-modal .modal-body {
+    /* Add any custom styles for the modal body */
+}
+
+.custom-modal .modal-footer {
+    /* Add any custom styles for the modal footer */
+}
+

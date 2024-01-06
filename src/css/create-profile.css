@@ -1,0 +1,93 @@
+.PageContainer {
+    min-height: 100vh;
+    /* Ensure the page fills the viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+.headerLogged {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(33, 45, 58);
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    
+
+}
+
+.headerLogged img {
+    width: 20%;
+    margin-right: auto;
+}
+
+.LogoutButton {
+
+}
+
+.ProfileTitle {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.CreateProfileContainer {
+    background-color: rgb(33, 45, 58);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+    overflow: hidden;
+    max-height: auto;
+    transition: height 0.8s;
+}
+
+.CreateProfileContainer.avatar {
+    height: 710px;
+}
+
+.CreateProfileContainer.partner {
+    height: 895px;
+}
+
+.CreateProfileContainer.confirmation {
+    height: 895px;
+}
+
+.SectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.Profile-AvatarContainer,
+.Profile-PartnerContainer {
+    max-width: 100%;
+}
+
+.ProfileButtons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.Confirmation-Container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.Confirmation-officialImage {
+    width: 60%;
+}
+
+.Confirmation-spriteContainer {
+    margin-top: 15px;
+}
+
+.Confirmation-spriteContainer:hover {
+    cursor: pointer;
+}

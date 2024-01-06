@@ -43,19 +43,27 @@
     margin: 10px;
     overflow: hidden;
     max-height: auto;
-    transition: height 0.8s;
+    transition: height 0.8s, width 0.8s;
+}
+
+.CreateProfileContainer.age {
+    height: 300px;
+    width: 300px;
 }
 
 .CreateProfileContainer.avatar {
     height: 710px;
+    width: 800px;
 }
 
 .CreateProfileContainer.partner {
     height: 895px;
+    width: 800px;
 }
 
 .CreateProfileContainer.confirmation {
     height: 895px;
+    width: 800px;
 }
 
 .SectionTitle {

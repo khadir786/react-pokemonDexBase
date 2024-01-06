@@ -32,22 +32,13 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
 
     const goNext = () => {
         console.log("go next");
-        if (activeIndex === 0) {
-            return setActiveIndex(1);
-
-        } else {
-            return setActiveIndex(2);
-        }
+        setActiveIndex(prevActiveIndex => prevActiveIndex+1)
+        console.log(activeIndex);
     }
 
     const goBack = () => {
         console.log("go back");
-        if (activeIndex === 2) {
-            return setActiveIndex(1);
-
-        } else {
-            return setActiveIndex(0);
-        }
+        setActiveIndex(prevActiveIndex => prevActiveIndex-1)
     }
 
     const handleConfirm = async (userID, userData) => {
@@ -68,9 +59,10 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
         <div className={`PageContainer`}>
             <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} logged={true} />
             <div
-                className={`CreateProfileContainer ${activeIndex === 0 ? 'avatar'
-                    : activeIndex === 1 ? 'partner'
-                        : 'confirmation'}`}
+                className={`CreateProfileContainer ${activeIndex === 0 ? 'age'
+                    : activeIndex === 1 ? 'avatar'
+                        : activeIndex === 2 ? 'partner'
+                            : 'confirmation'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">
@@ -83,18 +75,24 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                         controls={false}
                     >
                         <Carousel.Item key={0}>
+                            <div className="Profile-AgeContainer">
+                                <h2 className="SectionTitle">How old are you?</h2>
+                                <p>age</p>
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item key={1}>
                             <div className="Profile-AvatarContainer">
                                 <h2 className="SectionTitle">Select Your Avatar</h2>
                                 <AvatarPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
-                        <Carousel.Item key={1}>
+                        <Carousel.Item key={2}>
                             <div className="Profile-PartnerContainer">
                                 <h2 className="SectionTitle">Select Your Partner Pokemon</h2>
                                 <PartnerPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
-                        <Carousel.Item key={2}>
+                        <Carousel.Item key={3}>
                             <div className="Profile-ConfirmContainer">
                                 <h2 className="SectionTitle">Confirm</h2>
                                 <Confirmation
@@ -110,7 +108,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                     activeIndex === 0 ? <Button variant="primary" onClick={goNext}>Next</Button> :
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
-                            {activeIndex === 1 ? <Button variant="primary" onClick={goNext}>Next</Button>
+                            {activeIndex === 1 || activeIndex === 2 ? <Button variant="primary" onClick={goNext}>Next</Button>
                                 : <Button variant="primary" onClick={() => {
                                     handleConfirm(userID, userData);
                                 }}>Confirm</Button>}

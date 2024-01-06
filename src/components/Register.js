@@ -67,7 +67,7 @@ export default function Register(props) {
                 setErrorMessage(prevErrorMessage => {
                     return {
                         type: "success",
-                        message: `User: ${response.username} has been registered!!!`,
+                        message: `User: ${response.username} has been registered!`,
                         heading: "Success!"
                     }
                 })

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
-import { registerUser } from "../apiService"
 import ModalComp from "./sub_components/ModalComp";
+import Header from "./Header";
+import Collapse from 'react-bootstrap/Collapse';
+import { registerUser } from "../apiService"
 import { CSSTransition } from 'react-transition-group';
+import { Link } from "react-router-dom";
 import '../css/register-login.css';
 import '../css/rl-transitions.css';
-import Header from "./Header";
-import { Link } from "react-router-dom";
 
 export default function Register(props) {
     const [isRegisterVisible, setIsRegisterVisible] = useState(false);
@@ -16,6 +17,7 @@ export default function Register(props) {
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
     const registerRef = useRef(null);
 
 
@@ -44,10 +46,6 @@ export default function Register(props) {
         })
     }
 
-    function toggleModal() {
-        setShowModal(!showModal);
-    }
-
     function handleSubmit(event) {
         event.preventDefault();
         if (!formData.username || !formData.username) {
@@ -58,7 +56,7 @@ export default function Register(props) {
                     heading: "Warning!"
                 }
             })
-            return toggleModal();
+            return setErrorOpen(true);
         }
         setLoading(true);
 
@@ -68,24 +66,25 @@ export default function Register(props) {
                 // Handle success...
                 setErrorMessage(prevErrorMessage => {
                     return {
-                        type:"success",
+                        type: "success",
                         message: `User: ${response.username} has been registered!!!`,
                         heading: "Success!"
                     }
                 })
-                toggleModal();
+                setErrorOpen(true);
+
             })
             .catch(error => {
                 if (error.response && error.response.data) {
                     console.error('Registration failed:', error.response.data); //this works for some reason
                     setErrorMessage(prevErrorMessage => {
                         return {
-                            type:"error",
+                            type: "error",
                             message: error.response.data,
                             heading: "Registration failed..."
                         }
                     })
-                    toggleModal();
+                    setErrorOpen(true);
                 }
             })
             .finally(() => setLoading(false));
@@ -104,10 +103,13 @@ export default function Register(props) {
                 unmountOnExit
                 nodeRef={registerRef}
             >
-                <div className="register-login" ref={registerRef}>
+                <div className="register-login" ref={registerRef}
+                    aria-controls="errorMessage"
+                    aria-expanded={errorOpen}
+                >
                     <h1 className="register-login-title">Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="rl-input-container">
+                        <div className="rl-input-container" onClick={() => setErrorOpen(false)}>
                             <input
                                 className="input-username"
                                 type="text"
@@ -126,16 +128,16 @@ export default function Register(props) {
                         </div>
                     </form>
                     <LoadingButton onClick={handleSubmit} isLoading={isLoading} />
-                    <p><Link to="/login">Login here</Link></p>
-                    {showModal && (
-                        <ModalComp
-                            type={errorMessage.type}
-                            show={showModal}
-                            toggleModal={toggleModal}
-                            heading={errorMessage.heading}
-                            message={errorMessage.message}
-                        />
-                    )}
+                    <Collapse in={errorOpen}>
+                        <div id="errorMessage" style={{
+                            color: errorMessage.type === 'error' ? 'red' :
+                                errorMessage.type === 'success' ? 'green' : 'yellow'
+                        }}>
+                            {errorMessage.message}
+                        </div>
+                    </Collapse>
+                    <p className="link-reg-log">Already have an account? <span><Link to="/login">Login here </Link></span></p>
+
                 </div>
             </CSSTransition>
         </div>

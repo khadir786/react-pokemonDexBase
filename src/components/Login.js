@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
-import ModalComp from "./sub_components/ModalComp";
 import Header from "./Header";
+import Collapse from 'react-bootstrap/Collapse';
 import { CSSTransition } from 'react-transition-group';
 import { Link } from "react-router-dom";
 import { loginUser } from "../apiService";
@@ -17,7 +17,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
     const [isLoginVisible, setIsLoginVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
     const loginRef = useRef(null);
     const { login } = useUser();
 
@@ -55,7 +55,7 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                     heading: "Warning!"
                 }
             })
-            return toggleModal();
+            return setErrorOpen(true);
         }
         setLoading(true);
 
@@ -77,15 +77,12 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                             heading: "Login failed..."
                         }
                     })
-                    toggleModal();
+                    setErrorOpen(true);
                 }
             })
             .finally(() => setLoading(false));
     }
 
-    function toggleModal() {
-        setShowModal(!showModal);
-    }
 
     return (
         <div className="Landing">
@@ -97,10 +94,13 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                 unmountOnExit
                 nodeRef={loginRef}
             >
-                <div className="register-login" ref={loginRef}>
+                <div className="register-login" ref={loginRef}
+                    aria-controls="errorMessage"
+                    aria-expanded={errorOpen}
+                >
                     <h1 className="register-login-title">Login</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="rl-input-container">
+                        <div className="rl-input-container" onClick={() => setErrorOpen(false)}>
                             <input
                                 className="input-username"
                                 type="text"
@@ -119,16 +119,12 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                         </div>
                         <LoadingButton type="submit" />
                     </form>
-                    <p>Don't have an account? <span><Link to="/register">Register here </Link></span></p>
-                    {showModal && (
-                        <ModalComp
-                            type={errorMessage.type}
-                            show={showModal}
-                            toggleModal={toggleModal}
-                            heading={errorMessage.heading}
-                            message={errorMessage.message}
-                        />
-                    )}
+                    <Collapse in={errorOpen}>
+                        <div id="errorMessage">
+                            {errorMessage.message}
+                        </div>
+                    </Collapse>
+                    <p className="link-reg-log">Don't have an account? <span><Link to="/register">Register here </Link></span></p>
                 </div>
             </CSSTransition>
         </div>

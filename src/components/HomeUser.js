@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import Avatars from "./data/TrainerSpriteNames.js";
 import Partners from "./data/PartnerData.js";
 import Header from "./Header";
-import Collapse from 'react-bootstrap/Collapse';
+import TrainerCard from "./TrainerCard.js";
+import PartnerPokemon from "./PartnerPokemon.js";
 import { useLocation } from "react-router-dom";
 import { getUser, logoutUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
                         if (error.response && error.response.data) {
                             console.error('Error getting user details...:', error.response.data);
                             setErrorMessage("Error getting user details...");
+                            logout();
                         }
                     })
             } else {
@@ -68,35 +70,8 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
 
                 {isLoading === false ?
                     <div className="user-info-container">
-
-                        <div className="user-info">
-
-                            {foundAvatar && (
-                                <div className="user-avatar">
-                                    <img src={`https://play.pokemonshowdown.com/sprites/trainers/${foundAvatar.name}.png`} alt="Avatar" />
-                                    <p className="avatar-caption">{userData.username}</p>
-                                </div>
-                            )}
-
-                            {foundPartner && (
-                                <div className="user-partner"
-                                    onClick={() => setOpenEntry(!openEntry)}
-                                    aria-controls="dexEntry"
-                                    aria-expanded={openEntry}
-                                >
-                                    <img className="preview"
-                                        src={foundPartner.image}
-                                        alt="Partner Pokemon"
-                                    />
-                                    <p className="avatar-caption">{foundPartner.name}</p>
-                                    <Collapse in={openEntry}>
-                                        <div id={`dexEntry${openEntry === true ? '-active' : ''}`}>
-                                            {foundPartner.dexEntry}
-                                        </div>
-                                    </Collapse>
-                                </div>
-                            )}
-                        </div>
+                        {foundAvatar && (<TrainerCard username={userData.username} avatar={foundAvatar.name} />)}
+                        {foundPartner && (<PartnerPokemon openEntry={openEntry} setOpenEntry={setOpenEntry} foundPartner={foundPartner} />)}
                     </div> : <Dots />
 
                 }

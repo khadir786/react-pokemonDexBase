@@ -120,7 +120,10 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                         <LoadingButton type="submit" />
                     </form>
                     <Collapse in={errorOpen}>
-                        <div id="errorMessage">
+                        <div id="errorMessage" style={{
+                            color: errorMessage.type === 'error' ? 'red' :
+                                errorMessage.type === 'success' ? 'green' : 'yellow'
+                        }}>
                             {errorMessage.message}
                         </div>
                     </Collapse>

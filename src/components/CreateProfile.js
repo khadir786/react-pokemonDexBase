@@ -20,7 +20,8 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const [userData, setUserData] = useState(
         {
             avatar: 'red-gen2',
-            partnerPokemon: null
+            partnerPokemon: null,
+            DoB: null
         })
 
     console.log(userData);
@@ -46,20 +47,40 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const handleDateChange = (event) => {
         const newDob = event.target.value;
         setDob(newDob);
+        setUserData(prevUserData => ({
+            ...prevUserData,
+            DoB: newDob
+        }))
 
     };
 
+    function findNullProperties(obj) {
+        const nullProperties = [];
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key) && obj[key] === null) {
+            nullProperties.push(key);
+          }
+        }
+        return nullProperties;
+      }
+
     const handleConfirm = async (userID, userData) => {
-        const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name }
-        updateUser(userID, request)
-            .then((response) => {
-                console.log(response);
-                navigate('/home');
-            }
-            )
-            .catch(error => {
-                console.log("Update failed: ", error)
-            })
+        if (userData.avatar === null || userData.partnerPokemon === null || userData.DoB === null) {
+            const nullProperties = findNullProperties(userData);
+            console.log(nullProperties);
+            return console.log("At least one of the values is null");
+        } else {
+            const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.dob }
+            updateUser(userID, request)
+                .then((response) => {
+                    console.log(response);
+                    navigate('/home');
+                }
+                )
+                .catch(error => {
+                    console.log("Update failed: ", error)
+                })
+        }
     }
 
     console.log("Active index:" + activeIndex);

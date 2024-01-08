@@ -70,7 +70,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
             console.log("Null properties:", nullProperties.join(", "));
             return console.log("At least one of the values is null");
         } else {
-            const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.dob }
+            const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.DoB }
             updateUser(userID, request)
                 .then((response) => {
                     console.log(response);

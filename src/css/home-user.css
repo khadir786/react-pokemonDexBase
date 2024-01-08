@@ -55,6 +55,10 @@ body {
     margin: 10px;
 }
 
+.input-dob {
+    margin: 10px;   
+}
+
 .avatar-caption {
     margin-top: 10px;
     margin-bottom: 0px;
@@ -106,6 +110,11 @@ body {
     font-size: .875rem;
     color: #6c757d;
 }
+
+.button-container {
+    padding: 20px;
+    text-align: center;
+  }
 
 /* .Logo {
     margin: 10px;

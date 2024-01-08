@@ -15,6 +15,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     const location = useLocation();
     const userID = location.state?.id;
     const navigate = useNavigate();
+    const [dob, setDob] = useState('2000-01-01');;
     const [activeIndex, setActiveIndex] = useState(0);
     const [userData, setUserData] = useState(
         {
@@ -23,6 +24,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
         })
 
     console.log(userData);
+    console.log(dob)
 
 
     const handleSelectSlide = (selectedIndex) => {
@@ -32,14 +34,20 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
 
     const goNext = () => {
         console.log("go next");
-        setActiveIndex(prevActiveIndex => prevActiveIndex+1)
+        setActiveIndex(prevActiveIndex => prevActiveIndex + 1)
         console.log(activeIndex);
     }
 
     const goBack = () => {
         console.log("go back");
-        setActiveIndex(prevActiveIndex => prevActiveIndex-1)
+        setActiveIndex(prevActiveIndex => prevActiveIndex - 1)
     }
+
+    const handleDateChange = (event) => {
+        const newDob = event.target.value;
+        setDob(newDob);
+
+    };
 
     const handleConfirm = async (userID, userData) => {
         const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name }
@@ -77,7 +85,17 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                         <Carousel.Item key={0}>
                             <div className="Profile-AgeContainer">
                                 <h2 className="SectionTitle">How old are you?</h2>
-                                <p>age</p>
+                                <label htmlFor="dobInput">Date of Birth:</label>
+                                <input
+                                    className="input-dob"
+                                    type="date"
+                                    id="dobInput"
+                                    name="dob"
+                                    value={dob}
+                                    min="1900-01-01"
+                                    max={new Date().toISOString().split('T')[0]} // Set the max to the current date
+                                    onChange={handleDateChange}
+                                />
                             </div>
                         </Carousel.Item>
                         <Carousel.Item key={1}>
@@ -104,16 +122,20 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                         </Carousel.Item>
                     </Carousel>
                 </div>
-                {
-                    activeIndex === 0 ? <Button variant="primary" onClick={goNext}>Next</Button> :
+                <div className="button-container">
+                    {activeIndex === 0 ? (
+                        <Button variant="primary" onClick={goNext}>Next</Button>
+                    ) : (
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
-                            {activeIndex === 1 || activeIndex === 2 ? <Button variant="primary" onClick={goNext}>Next</Button>
-                                : <Button variant="primary" onClick={() => {
-                                    handleConfirm(userID, userData);
-                                }}>Confirm</Button>}
+                            {activeIndex === 1 || activeIndex === 2 ? (
+                                <Button variant="primary" onClick={goNext}>Next</Button>
+                            ) : (
+                                <Button variant="primary" onClick={() => { handleConfirm(userID, userData); }}>Confirm</Button>
+                            )}
                         </div>
-                }
+                    )}
+                </div>
             </div>
         </div>
     );

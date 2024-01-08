@@ -57,17 +57,17 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     function findNullProperties(obj) {
         const nullProperties = [];
         for (const key in obj) {
-          if (obj.hasOwnProperty(key) && obj[key] === null) {
-            nullProperties.push(key);
-          }
+            if (obj.hasOwnProperty(key) && obj[key] === null) {
+                nullProperties.push(key);
+            }
         }
         return nullProperties;
-      }
+    }
 
     const handleConfirm = async (userID, userData) => {
         if (userData.avatar === null || userData.partnerPokemon === null || userData.DoB === null) {
             const nullProperties = findNullProperties(userData);
-            console.log(nullProperties);
+            console.log("Null properties:", nullProperties.join(", "));
             return console.log("At least one of the values is null");
         } else {
             const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.dob }

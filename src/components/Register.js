@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
-import ModalComp from "./sub_components/ModalComp";
+import Alert from 'react-bootstrap/Alert';
 import Header from "./Header";
 import Collapse from 'react-bootstrap/Collapse';
 import { registerUser } from "../apiService"
@@ -46,44 +46,79 @@ export default function Register(props) {
         })
     }
 
+    const validateInput = () => {
+        const usernameRegex = /^[a-zA-Z0-9_]+$/; // Allow only alphanumeric and underscore characters
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/; // Example password regex
+
+        if (!formData.username) {
+            setErrorMessage({
+                type: "warning",
+                message: "Username is required",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        if (!usernameRegex.test(formData.username)) {
+            setErrorMessage({
+                type: "warning",
+                message: "Username contains invalid characters",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        if (!formData.password) {
+            setErrorMessage({
+                type: "warning",
+                message: "Password is required",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        if (!passwordRegex.test(formData.password)) {
+            setErrorMessage({
+                type: "warning",
+                message: "Password does not meet complexity requirements",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        return true;
+    };
+
     function handleSubmit(event) {
         event.preventDefault();
-        if (!formData.username || !formData.password) {
-            setErrorMessage(prevErrorMessage => {
-                return {
-                    type: "warning",
-                    message: "Please fill out all fields",
-                    heading: "Warning!"
-                }
-            })
-            return setErrorOpen(true);
+
+        // Validate the input
+        if (!validateInput()) {
+            setErrorOpen(true);
+            return;
         }
+
         setLoading(true);
 
         registerUser(formData)
             .then(response => {
                 console.log('Registration successful:', response);
                 // Handle success...
-                setErrorMessage(prevErrorMessage => {
-                    return {
-                        type: "success",
-                        message: `User: ${response.username} has been registered!`,
-                        heading: "Success!"
-                    }
-                })
+                setErrorMessage({
+                    type: "success",
+                    message: `User: ${response.username} has been registered!`,
+                    heading: "Success!"
+                });
                 setErrorOpen(true);
-
             })
             .catch(error => {
                 if (error.response && error.response.data) {
-                    console.error('Registration failed:', error.response.data); //this works for some reason
-                    setErrorMessage(prevErrorMessage => {
-                        return {
-                            type: "error",
-                            message: error.response.data,
-                            heading: "Registration failed..."
-                        }
-                    })
+                    console.error('Registration failed:', error.response.data);
+                    setErrorMessage({
+                        type: "error",
+                        message: error.response.data,
+                        heading: "Registration failed..."
+                    });
                     setErrorOpen(true);
                 }
             })

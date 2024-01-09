@@ -45,18 +45,48 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
         })
     }
 
+    const validateInput = () => {
+        const usernameRegex = /^[a-zA-Z0-9_]+$/; // Allow only alphanumeric and underscore characters
+
+        if (!formData.username) {
+            setErrorMessage({
+                type: "warning",
+                message: "Username is required",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        if (!usernameRegex.test(formData.username)) {
+            setErrorMessage({
+                type: "warning",
+                message: "Username contains invalid characters",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        if (!formData.password) {
+            setErrorMessage({
+                type: "warning",
+                message: "Password is required",
+                heading: "Warning!"
+            });
+            return false;
+        }
+
+        return true;
+    };
+
     function handleSubmit(event) {
         event.preventDefault();
-        if (!formData.username || !formData.username) {
-            setErrorMessage(prevErrorMessage => {
-                return {
-                    type: "warning",
-                    message: "Please fill out all fields",
-                    heading: "Warning!"
-                }
-            })
-            return setErrorOpen(true);
+
+        // Validate the input
+        if (!validateInput()) {
+            setErrorOpen(true);
+            return;
         }
+
         setLoading(true);
 
         loginUser(formData.username, formData.password)
@@ -65,18 +95,16 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                 // Handle success...
                 login(response);
                 setIsLoggedIn(true);
-                navigate('/home')
+                navigate('/home');
             })
             .catch(error => {
                 if (error.response && error.response.data) {
                     console.error('Login failed:', error.response.data);
-                    setErrorMessage(prevErrorMessage => {
-                        return {
-                            type: "error",
-                            message: error.response.data,
-                            heading: "Login failed..."
-                        }
-                    })
+                    setErrorMessage({
+                        type: "error",
+                        message: error.response.data,
+                        heading: "Login failed..."
+                    });
                     setErrorOpen(true);
                 }
             })

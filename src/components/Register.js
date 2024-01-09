@@ -16,7 +16,7 @@ export default function Register(props) {
     )
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showPasswordRules, setShowPasswordRules] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
     const registerRef = useRef(null);
 
@@ -83,6 +83,7 @@ export default function Register(props) {
                 message: "Password does not meet complexity requirements",
                 heading: "Warning!"
             });
+            setShowPasswordRules(true);
             return false;
         }
 
@@ -144,7 +145,10 @@ export default function Register(props) {
                 >
                     <h1 className="register-login-title">Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="rl-input-container" onClick={() => setErrorOpen(false)}>
+                        <div className="rl-input-container" onClick={() => {
+                            setErrorOpen(false);
+                            setShowPasswordRules(false);
+                        }}>
                             <input
                                 className="input-username"
                                 type="text"
@@ -164,12 +168,25 @@ export default function Register(props) {
                     </form>
                     <LoadingButton onClick={handleSubmit} isLoading={isLoading} />
                     <Collapse in={errorOpen}>
-                        <div id="errorMessage" style={{
-                            color: errorMessage.type === 'error' ? 'red' :
-                                errorMessage.type === 'success' ? 'green' : 'yellow'
-                        }}>
-                            {errorMessage.message}
+                        <div>
+                            <div id="errorMessage" style={{
+                                color: errorMessage.type === 'error' ? 'red' :
+                                    errorMessage.type === 'success' ? 'green' : 'yellow'
+                            }}>
+                                {errorMessage.message}
+                            </div>
+                            {showPasswordRules && (<div className="passwordRules-Alert">
+                                <Alert variant="warning">
+                                    <Alert.Heading>Your Password Must:</Alert.Heading>
+                                    <hr />
+                                    <li className="passwordRules">Contain at least one uppercase or lowercase letter</li>
+                                    <li className="passwordRules">Contain at least one digit</li>
+                                    <li className="passwordRules">Contain at least one of the specified special characters (@$!%*#?&)</li>
+                                    <li className="passwordRules">Be at least 8 characters in length</li>
+                                </Alert>
+                            </div>)}
                         </div>
+
                     </Collapse>
                     <p className="link-reg-log">Already have an account? <span><Link to="/login">Login here </Link></span></p>
 

@@ -20,7 +20,7 @@ export const UserProvider = ({ children }) => {
                     logout();
                 }
             } catch (error) {
-                setUser(null);
+                logout();
             }
             setIsLoading(false);
         };

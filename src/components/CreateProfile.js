@@ -7,6 +7,7 @@ import PartnerPick from "./PartnerPick";
 import Carousel from 'react-bootstrap/Carousel';
 import Button from 'react-bootstrap/Button';
 import Confirmation from "./Confirmation";
+import RegionSelect from "./RegionSelect";
 
 import "../css/create-profile.css";
 import "../css/carousel.css";
@@ -91,7 +92,8 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                 className={`CreateProfileContainer ${activeIndex === 0 ? 'age'
                     : activeIndex === 1 ? 'avatar'
                         : activeIndex === 2 ? 'partner'
-                            : 'confirmation'}`}
+                            : activeIndex === 3 ? 'region'
+                                : 'confirmation'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
                 <div className="carousel-container">
@@ -132,6 +134,12 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                             </div>
                         </Carousel.Item>
                         <Carousel.Item key={3}>
+                            <div className="Profile-RegionContainer">
+                                <h2 className="SectionTitle">Where are you from?</h2>
+                                <RegionSelect userData={userData} setUserData={setUserData} />
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item key={4}>
                             <div className="Profile-ConfirmContainer">
                                 <h2 className="SectionTitle">Confirm</h2>
                                 <Confirmation
@@ -149,7 +157,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                     ) : (
                         <div className="ProfileButtons">
                             <Button variant="outline-secondary" onClick={goBack}>Back</Button>
-                            {activeIndex === 1 || activeIndex === 2 ? (
+                            {activeIndex === 1 || activeIndex === 2 || activeIndex === 3 ? (
                                 <Button variant="primary" onClick={goNext}>Next</Button>
                             ) : (
                                 <Button variant="primary" onClick={() => { handleConfirm(userID, userData); }}>Confirm</Button>

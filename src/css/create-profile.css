@@ -65,6 +65,11 @@
     width: 800px;
 }
 
+.CreateProfileContainer.region {
+    height: 900px;
+    width: 800px;
+}
+
 .CreateProfileContainer.confirmation {
     height: 895px;
     width: 800px;

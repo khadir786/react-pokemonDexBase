@@ -3,6 +3,7 @@ import LoadingButton from "./sub_components/LoadingButton"
 import Alert from 'react-bootstrap/Alert';
 import Header from "./Header";
 import Collapse from 'react-bootstrap/Collapse';
+import { validateInput } from "../utils/formValidation";
 import { registerUser } from "../apiService"
 import { CSSTransition } from 'react-transition-group';
 import { Link } from "react-router-dom";
@@ -46,55 +47,11 @@ export default function Register(props) {
         })
     }
 
-    const validateInput = () => {
-        const usernameRegex = /^[a-zA-Z0-9_]+$/; // Allow only alphanumeric and underscore characters
-        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/; // Example password regex
-
-        if (!formData.username) {
-            setErrorMessage({
-                type: "warning",
-                message: "Username is required",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        if (!usernameRegex.test(formData.username)) {
-            setErrorMessage({
-                type: "warning",
-                message: "Username contains invalid characters",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        if (!formData.password) {
-            setErrorMessage({
-                type: "warning",
-                message: "Password is required",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        if (!passwordRegex.test(formData.password)) {
-            setErrorMessage({
-                type: "warning",
-                message: "Password does not meet complexity requirements",
-                heading: "Warning!"
-            });
-            setShowPasswordRules(true);
-            return false;
-        }
-
-        return true;
-    };
-
     function handleSubmit(event) {
         event.preventDefault();
 
         // Validate the input
-        if (!validateInput()) {
+        if (!validateInput(formData, setErrorMessage, setShowPasswordRules, "REGISTER")) {
             setErrorOpen(true);
             return;
         }
@@ -125,8 +82,6 @@ export default function Register(props) {
             })
             .finally(() => setLoading(false));
     }
-
-
 
     return (
         <div className="Landing">

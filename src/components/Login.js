@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../apiService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext";
+import { validateInput } from "../utils/formValidation";
 import '../css/register-login.css';
 import '../css/rl-transitions.css';
 
@@ -45,44 +46,11 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
         })
     }
 
-    const validateInput = () => {
-        const usernameRegex = /^[a-zA-Z0-9_]+$/; // Allow only alphanumeric and underscore characters
-
-        if (!formData.username) {
-            setErrorMessage({
-                type: "warning",
-                message: "Username is required",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        if (!usernameRegex.test(formData.username)) {
-            setErrorMessage({
-                type: "warning",
-                message: "Username contains invalid characters",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        if (!formData.password) {
-            setErrorMessage({
-                type: "warning",
-                message: "Password is required",
-                heading: "Warning!"
-            });
-            return false;
-        }
-
-        return true;
-    };
-
     function handleSubmit(event) {
         event.preventDefault();
 
         // Validate the input
-        if (!validateInput()) {
+        if (!validateInput(formData, setErrorMessage, () => {}, "LOGIN")) {
             setErrorOpen(true);
             return;
         }

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/trainer-card.css';
 
-const TrainerCard = ({ username, avatar, dob }) => {
+const TrainerCard = ({ username, avatar, dob, region }) => {
   
   function calculateAge(dob) {
     var ageDifMs = Date.now() - dob.getTime();
@@ -18,7 +18,7 @@ const TrainerCard = ({ username, avatar, dob }) => {
       <div className="trainer-info">
         <h2 className="trainer-name">{username}</h2>
         <p className="trainer-age">Age: {age}</p>
-        <p className="trainer-location">Location: Sinnoh</p>
+        <p className="trainer-location">Location: {region}</p>
       </div>
     </div>
   );

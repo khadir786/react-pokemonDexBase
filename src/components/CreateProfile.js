@@ -22,6 +22,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
         {
             avatar: 'red-gen2',
             partnerPokemon: null,
+            region: null,
             DoB: null
         })
 
@@ -66,7 +67,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     }
 
     const handleConfirm = async (userID, userData) => {
-        if (userData.avatar === null || userData.partnerPokemon === null || userData.DoB === null) {
+        if (userData.avatar === null || userData.partnerPokemon === null || userData.DoB === null || userData.region === null) {
             const nullProperties = findNullProperties(userData);
             console.log("Null properties:", nullProperties.join(", "));
             return console.log("At least one of the values is null");
@@ -76,8 +77,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                 .then((response) => {
                     console.log(response);
                     navigate('/home');
-                }
-                )
+                })
                 .catch(error => {
                     console.log("Update failed: ", error)
                 })
@@ -91,8 +91,8 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
             <div
                 className={`CreateProfileContainer ${activeIndex === 0 ? 'age'
                     : activeIndex === 1 ? 'avatar'
-                        : activeIndex === 2 ? 'partner'
-                            : activeIndex === 3 ? 'region'
+                        : activeIndex === 2 ? 'region'
+                            : activeIndex === 3 ? 'partner'
                                 : 'confirmation'}`}
             >
                 <h1 className="ProfileTitle">Who are you?</h1>
@@ -128,15 +128,15 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
                             </div>
                         </Carousel.Item>
                         <Carousel.Item key={2}>
-                            <div className="Profile-PartnerContainer">
-                                <h2 className="SectionTitle">Select Your Partner Pokemon</h2>
-                                <PartnerPick userData={userData} setUserData={setUserData} />
-                            </div>
-                        </Carousel.Item>
-                        <Carousel.Item key={3}>
                             <div className="Profile-RegionContainer">
                                 <h2 className="SectionTitle">Where are you from?</h2>
                                 <RegionSelect userData={userData} setUserData={setUserData} />
+                            </div>
+                        </Carousel.Item>
+                        <Carousel.Item key={3}>
+                            <div className="Profile-PartnerContainer">
+                                <h2 className="SectionTitle">Select Your Partner Pokemon</h2>
+                                <PartnerPick userData={userData} setUserData={setUserData} />
                             </div>
                         </Carousel.Item>
                         <Carousel.Item key={4}>

@@ -70,7 +70,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
 
                 {isLoading === false ?
                     <div className="user-info-container">
-                        {foundAvatar && (<TrainerCard username={userData.username} avatar={foundAvatar.name} dob={userData.dob} />)}
+                        {foundAvatar && (<TrainerCard username={userData.username} avatar={foundAvatar.name} dob={userData.dob} region={userData.region}/>)}
                         {foundPartner && (<PartnerPokemon openEntry={openEntry} setOpenEntry={setOpenEntry} foundPartner={foundPartner} />)}
                     </div> : <Dots />
 

@@ -22,6 +22,10 @@ body {
     flex-direction: row;
 }
 
+.menu-items {
+    padding: 10px;
+}
+
 .profile-pic-Container {
     width: auto;
     border: 2px solid #007bff;
@@ -29,7 +33,7 @@ body {
     overflow: hidden;
     transition: border-color 0.3s;
     background-color: rgb(20, 28, 41);
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 .profile-pic-Container:hover {

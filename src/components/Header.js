@@ -2,8 +2,8 @@ import React from "react"
 import logo from '../img/logo.png'
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
-import Overlay from 'react-bootstrap/Overlay';
-import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 import { logoutUser } from "../apiService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext";
@@ -36,7 +36,22 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged, userData }) 
                 <div className="header-right">
                     {userData &&
                         <div className="profile-pic-Container">
-                            <img className="profile-pic" src={`https://play.pokemonshowdown.com/sprites/trainers/${userData.avatar}.png`} alt="profile pic" />
+                            <OverlayTrigger
+                                trigger="click"
+                                placement="bottom"
+                                overlay={
+                                    <Popover id={`popover-positioned-bottom`}>
+                                        <Popover.Body style={{padding: '5px'}}>
+                                            <ListGroup variant="flush">
+                                                <ListGroup.Item action className="menu-items">Edit Profile</ListGroup.Item>
+                                            </ListGroup>
+                                        </Popover.Body>
+                                    </Popover>
+                                }
+                            >
+                                <img className="profile-pic" src={`https://play.pokemonshowdown.com/sprites/trainers/${userData.avatar}.png`} alt="profile pic"
+                                />
+                            </OverlayTrigger>
                         </div>
                     }
                     <Button variant="secondary" className="LogoutButton" onClick={handleLogout}>Logout</Button>

@@ -63,7 +63,7 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
 
     return (
         <div className="home-user">
-            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             <div className="user-content">
 
                 <h1 className="user-welcome">Welcome!</h1>

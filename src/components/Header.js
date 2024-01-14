@@ -5,7 +5,7 @@ import { logoutUser } from "../apiService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext";
 
-export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
+export default function Header({ isLoggedIn, setIsLoggedIn, logged, userData }) {
     const navigate = useNavigate();
     const { logout } = useUser();
 

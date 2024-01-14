@@ -23,7 +23,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
             avatar: 'red-gen2',
             partnerPokemon: null,
             region: null,
-            DoB: null
+            DoB: '2000-01-01'
         })
 
     console.log(userData);

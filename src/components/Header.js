@@ -1,6 +1,5 @@
 import React from "react"
 import logo from '../img/logo.png'
-import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
@@ -26,11 +25,10 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged, userData }) 
             })
     };
 
-    console.log("avatar for profile pic: ", userData.avatar);
     return (
 
         <nav style={{ width: '100%' }} className={isLoggedIn ? "headerLogged" : "header"}>
-            <img className="Logo" alt="logo" src={logo} />
+            <img className={isLoggedIn ? "logoLogged" : "Logo"} alt="logo" src={logo} />
             {
                 isLoggedIn &&
                 <div className="header-right">
@@ -43,7 +41,8 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged, userData }) 
                                     <Popover id={`popover-positioned-bottom`}>
                                         <Popover.Body style={{padding: '5px'}}>
                                             <ListGroup variant="flush">
-                                                <ListGroup.Item action className="menu-items">Edit Profile</ListGroup.Item>
+                                                <ListGroup.Item eventKey={1} action className="menu-items">Edit Profile</ListGroup.Item>
+                                                <ListGroup.Item eventKey={2} action onClick={handleLogout} className="menu-items">Logout</ListGroup.Item>
                                             </ListGroup>
                                         </Popover.Body>
                                     </Popover>
@@ -54,7 +53,6 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged, userData }) 
                             </OverlayTrigger>
                         </div>
                     }
-                    <Button variant="secondary" className="LogoutButton" onClick={handleLogout}>Logout</Button>
                 </div>
             }
 

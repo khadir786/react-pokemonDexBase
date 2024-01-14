@@ -149,7 +149,11 @@ body {
     text-align: center;
 }
 
-.Logo {
+.logoLogged {
     width: 20%;
     margin-right: auto;
+}
+
+.Logo {
+    width: auto;
 }

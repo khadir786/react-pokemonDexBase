@@ -15,6 +15,35 @@ body {
     /* padding-bottom: 0px; */
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.profile-pic-Container {
+    width: auto;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    background-color: rgb(20, 28, 41);
+    margin-right: 5px;
+}
+
+.profile-pic-Container:hover {
+    border-color: #0056b3;
+    cursor: pointer;
+}
+
+.profile-pic {
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+}
+
 .home-user {
     font-family: Arial, sans-serif;
     color: white;
@@ -41,7 +70,7 @@ body {
 #dexEntry {
     margin-top: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
-    padding: 5px;   
+    padding: 5px;
 }
 
 #dexEntry-active {
@@ -56,7 +85,7 @@ body {
 }
 
 .input-dob {
-    margin: 10px;   
+    margin: 10px;
 }
 
 .avatar-caption {
@@ -106,7 +135,7 @@ body {
 }
 
 .dex-footer {
-    margin-top: 5px ;
+    margin-top: 5px;
     font-size: .875rem;
     color: #6c757d;
 }
@@ -114,11 +143,9 @@ body {
 .button-container {
     padding: 20px;
     text-align: center;
-  }
+}
 
-/* .Logo {
-    margin: 10px;
+.Logo {
+    width: 20%;
     margin-right: auto;
-    max-width: 200px;
-    max-height: 200px;
-} */
+}

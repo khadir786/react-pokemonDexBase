@@ -24,6 +24,7 @@ export default function RegionSelect({ userData, setUserData }) {
         }))
     };
 
+    const region = regions.find(region => region.name === userData.region);
     return (
         <div className="Region-Select">
             <div className='Region-Nav'>
@@ -46,10 +47,10 @@ export default function RegionSelect({ userData, setUserData }) {
                 {regions.map((region, index) => (
                     <Carousel.Item key={index}>
                         <img className="Region-Image" key={index} src={region.image} alt={`${index}`} />
+                        <p>{region.name}</p>
                     </Carousel.Item>
                 ))}
             </Carousel>
-            <p>region select</p>
 
         </div>
     )

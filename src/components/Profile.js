@@ -70,12 +70,29 @@ export default function Profile() {
     }
 
     const handleUpdate = () => {
-        const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.DoB, "region": userData.region }
+        const request = {};
+
+        if (userData.avatar !== null && userData.avatar !== undefined) {
+            request.avatar = userData.avatar;
+        }
+
+        if (userData.partnerPokemon && userData.partnerPokemon.name !== null && userData.partnerPokemon.name !== undefined) {
+            request.partnerPokemon = userData.partnerPokemon.name;
+        }
+
+        if (userData.DoB !== null && userData.DoB !== undefined) {
+            request.dob = userData.DoB;
+        }
+
+        if (userData.region !== null && userData.region !== undefined) {
+            request.region = userData.region;
+        }
+
         updateUser(user.id, request)
             .then(response => {
                 console.log("Updated");
                 console.log(response);
-            })
+            })  
             .catch(error => {
                 console.log("Error updating");
                 console.log(error);

@@ -92,7 +92,7 @@ export default function Profile() {
             .then(response => {
                 console.log("Updated");
                 console.log(response);
-            })  
+            })
             .catch(error => {
                 console.log("Error updating");
                 console.log(error);
@@ -104,31 +104,22 @@ export default function Profile() {
             <Fade in={showFade}>
 
                 <div className="ProfileContent">
-                    <Offcanvas show={true} backdrop={false} data-bs-theme="dark">
-                        <Offcanvas.Header>
-                            <Offcanvas.Title>Edit Profile</Offcanvas.Title>
-                        </Offcanvas.Header>
-                        <Offcanvas.Body style={{ padding: 0 }}>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item action onClick={() => {
-                                    handleClick("Avatar");
-                                }}>Avatar
-                                </ListGroup.Item>
-                                <ListGroup.Item action onClick={() => {
-                                    handleClick("DoB");
-                                }}>Date of Birth
-                                </ListGroup.Item>
-                                <ListGroup.Item action onClick={() => {
-                                    handleClick("Region");
-                                }}>Region
-                                </ListGroup.Item>
-                                <ListGroup.Item action onClick={() => {
-                                    handleClick("Partner");
-                                }}>Partner Pokemon
-                                </ListGroup.Item>
-                            </ListGroup>
-                        </Offcanvas.Body>
-                    </Offcanvas>
+                    <div className="Profile-Canvas">
+                        <Offcanvas show={true} backdrop={false} data-bs-theme="dark">
+                            <Offcanvas.Header>
+                                <Offcanvas.Title>Edit Profile</Offcanvas.Title>
+                            </Offcanvas.Header>
+                            <Offcanvas.Body style={{ padding: 0 }}>
+                                <ListGroup variant="flush">
+                                    <ListGroup.Item action onClick={() => handleClick("Avatar")}>Avatar</ListGroup.Item>
+                                    <ListGroup.Item action onClick={() => handleClick("DoB")}>Date of Birth</ListGroup.Item>
+                                    <ListGroup.Item action onClick={() => handleClick("Region")}>Region</ListGroup.Item>
+                                    <ListGroup.Item action onClick={() => handleClick("Partner")}>Partner Pokemon</ListGroup.Item>
+                                    <ListGroup.Item className="offcanvas-home" action onClick={() => { navigate("/home") }}>Home</ListGroup.Item>
+                                </ListGroup>
+                            </Offcanvas.Body>
+                        </Offcanvas>
+                    </div>
 
                     <div
                         className={`UpdateProfileContainer ${activeComponent === 'Age' ? 'age'

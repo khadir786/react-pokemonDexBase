@@ -11,6 +11,12 @@
     z-index: 1; /* Ensure the content is above the Offcanvas */
 }
 
+.offcanvas-home {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 .UpdateProfileContainer {
     background-color: rgb(33, 45, 58);
     border-radius: 10px;

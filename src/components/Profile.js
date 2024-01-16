@@ -51,6 +51,18 @@ export default function Profile() {
 
     const handleClick = (component) => {
         setShowFade(false);
+        const userID = user.id;
+        getUser(userID)
+            .then(response => {
+                console.log(response);
+                setUserData(user);
+            })
+            .catch(error => {
+                if (error.response && error.response.data) {
+                    console.error('Error getting user details...:', error.response.data);
+                    logout();
+                }
+            })
         setTimeout(() => {
             setActiveComponent(component);
             setShowFade(true);
@@ -98,7 +110,7 @@ export default function Profile() {
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
-                    <Button>Update</Button>
+                        <Button>Update</Button>
                     </div>
                 </div>
             </Fade>

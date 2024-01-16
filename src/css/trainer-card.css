@@ -21,12 +21,12 @@
   .trainer-info {
     flex: 1;
   }
-  
-  .trainer-name {
+
+  .trainer-id {
     font-size: 24px;
-    margin: 0;
   }
   
+  .trainer-name,
   .trainer-age,
   .trainer-location {
     font-size: 16px;

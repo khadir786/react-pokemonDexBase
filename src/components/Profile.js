@@ -4,7 +4,7 @@ import { ListGroup, Button, Fade } from "react-bootstrap";
 import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
 import RegionSelect from "./RegionSelect";
-import { getUser, logoutUser } from "../apiService.js";
+import { getUser, logoutUser, updateUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext.js";
 import '../css/update-profile.css';
@@ -69,6 +69,19 @@ export default function Profile() {
         }, 200);
     }
 
+    const handleUpdate = () => {
+        const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.DoB, "region": userData.region }
+        updateUser(user.id, request)
+            .then(response => {
+                console.log("Updated");
+                console.log(response);
+            })
+            .catch(error => {
+                console.log("Error updating");
+                console.log(error);
+            })
+    }
+
     return (
         <div className="ProfilePage-Container">
             <Fade in={showFade}>
@@ -110,7 +123,7 @@ export default function Profile() {
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
-                        <Button>Update</Button>
+                        <Button onClick={() => { handleUpdate() }}>Update</Button>
                     </div>
                 </div>
             </Fade>

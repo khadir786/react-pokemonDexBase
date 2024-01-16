@@ -37,16 +37,16 @@
 }
 
 .UpdateProfileContainer.avatar {
-    height: 700px;
+    height: 610px;
     width: 800px;
 }
 
 .UpdateProfileContainer.partner {
-    height: 900px;
+    height: 790px;
     width: 800px;
 }
 
 .UpdateProfileContainer.region {
-    height: 900px;
+    height: 680px;
     width: 800px;
 }

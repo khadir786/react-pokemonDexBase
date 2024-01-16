@@ -4,6 +4,7 @@ import { ListGroup, Button, Fade } from "react-bootstrap";
 import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
 import RegionSelect from "./RegionSelect";
+import TrainerCardSelect from "./TrainerCardSelect.js";
 import { getUser, logoutUser, updateUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext.js";
@@ -96,6 +97,10 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
     const handleUpdate = () => {
         const request = {};
 
+        if (userData.cardImage !== null && userData.cardImage !== undefined) {
+            request.cardImage = userData.cardImage;
+        }
+
         if (userData.avatar !== null && userData.avatar !== undefined) {
             request.avatar = userData.avatar;
         }
@@ -136,6 +141,7 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                             <Offcanvas.Body>
                                 <div className="offcanvas-body">
                                     <ListGroup variant="flush">
+                                        <ListGroup.Item action onClick={() => handleClick("TrainerCard")}>Trainer Card</ListGroup.Item>
                                         <ListGroup.Item action onClick={() => handleClick("Avatar")}>Avatar</ListGroup.Item>
                                         <ListGroup.Item action onClick={() => handleClick("Age")}>Date of Birth</ListGroup.Item>
                                         <ListGroup.Item action onClick={() => handleClick("Region")}>Region</ListGroup.Item>
@@ -155,7 +161,7 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                             : activeComponent === 'Avatar' ? 'avatar'
                                 : activeComponent === 'Region' ? 'region'
                                     : activeComponent === 'Partner' ? 'partner'
-                                        : 'confirmation'}`}
+                                        : 'TrainerCard'}`}
                     >
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
 
@@ -174,6 +180,7 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                                 />
                             </div>}
 
+                        {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData}/></div>}
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
                         <Button onClick={() => { handleUpdate() }}>Update</Button>

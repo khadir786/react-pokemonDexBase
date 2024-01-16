@@ -14,8 +14,8 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
     const [showFade, setShowFade] = useState(true);
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
-
     const { isLoading, user, logout } = useUser();
+    const [dob, setDob] = useState('2000-01-01');
 
     const handleLogout = async () => {
         logoutUser()
@@ -29,6 +29,16 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                 setIsLoggedIn(false);
                 navigate("/login");
             })
+    };
+
+    const handleDateChange = (event) => {
+        const newDob = event.target.value;
+        setDob(newDob);
+        setUserData(prevUserData => ({
+            ...prevUserData,
+            DoB: newDob
+        }))
+
     };
 
     console.log(userData);
@@ -127,11 +137,11 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                                 <div className="offcanvas-body">
                                     <ListGroup variant="flush">
                                         <ListGroup.Item action onClick={() => handleClick("Avatar")}>Avatar</ListGroup.Item>
-                                        <ListGroup.Item action onClick={() => handleClick("DoB")}>Date of Birth</ListGroup.Item>
+                                        <ListGroup.Item action onClick={() => handleClick("Age")}>Date of Birth</ListGroup.Item>
                                         <ListGroup.Item action onClick={() => handleClick("Region")}>Region</ListGroup.Item>
                                         <ListGroup.Item action onClick={() => handleClick("Partner")}>Partner Pokemon</ListGroup.Item>
                                     </ListGroup>
-                                    <ListGroup variant="flush" horizontal className="offcanvas-bottom">
+                                    <ListGroup horizontal className="offcanvas-bottom">
                                         <ListGroup.Item action className="offcanvas-bottomItems" onClick={() => { navigate("/home") }}>Home</ListGroup.Item>
                                         <ListGroup.Item action className="offcanvas-bottomItems" onClick={handleLogout}>Logout</ListGroup.Item>
                                     </ListGroup>
@@ -148,6 +158,22 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                                         : 'confirmation'}`}
                     >
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
+
+                        {activeComponent === 'Age' && <div className="Profile-AgeContainer">
+                                <h2 className="SectionTitle">How old are you?</h2>
+                                <label htmlFor="dobInput">Date of Birth:</label>
+                                <input
+                                    className="input-dob"
+                                    type="date"
+                                    id="dobInput"
+                                    name="dob"
+                                    value={dob}
+                                    min="1900-01-01"
+                                    max={new Date().toISOString().split('T')[0]} // Set the max to the current date
+                                    onChange={handleDateChange}
+                                />
+                            </div>}
+
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
                         <Button onClick={() => { handleUpdate() }}>Update</Button>

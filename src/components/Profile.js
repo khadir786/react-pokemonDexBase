@@ -11,7 +11,7 @@ import '../css/update-profile.css';
 
 export default function Profile() {
     const [activeComponent, setActiveComponent] = useState("Avatar");
-    const [showFade, setShowFade] = useState(false);
+    const [showFade, setShowFade] = useState(true);
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ export default function Profile() {
         }
     }, [user, isLoading])
 
-    const handleFade = (component) => {
+    const handleClick = (component) => {
         setShowFade(false);
         setTimeout(() => {
             setActiveComponent(component);
@@ -62,26 +62,26 @@ export default function Profile() {
             <Fade in={showFade}>
 
                 <div className="ProfileContent">
-                    <Offcanvas show={true} backdrop={false}>
+                    <Offcanvas show={true} backdrop={false} data-bs-theme="dark">
                         <Offcanvas.Header>
                             <Offcanvas.Title>Edit Profile</Offcanvas.Title>
                         </Offcanvas.Header>
-                        <Offcanvas.Body style={{padding: 0}}>
+                        <Offcanvas.Body style={{ padding: 0 }}>
                             <ListGroup variant="flush">
                                 <ListGroup.Item action onClick={() => {
-                                    handleFade("Avatar");
+                                    handleClick("Avatar");
                                 }}>Avatar
                                 </ListGroup.Item>
                                 <ListGroup.Item action onClick={() => {
-                                    handleFade("DoB");
+                                    handleClick("DoB");
                                 }}>Date of Birth
                                 </ListGroup.Item>
                                 <ListGroup.Item action onClick={() => {
-                                    handleFade("Region");
+                                    handleClick("Region");
                                 }}>Region
                                 </ListGroup.Item>
                                 <ListGroup.Item action onClick={() => {
-                                    handleFade("Partner");
+                                    handleClick("Partner");
                                 }}>Partner Pokemon
                                 </ListGroup.Item>
                             </ListGroup>
@@ -96,10 +96,10 @@ export default function Profile() {
                                         : 'confirmation'}`}
                     >
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
-                        {activeComponent === 'Partner' && <PartnerPick userData={userData} setUserData={setUserData} />}
-                        {activeComponent === 'Region' && <RegionSelect userData={userData} setUserData={setUserData} />}
+                        {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
+                        {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
+                    <Button>Update</Button>
                     </div>
-
                 </div>
             </Fade>
         </div>

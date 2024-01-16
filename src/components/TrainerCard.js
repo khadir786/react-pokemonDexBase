@@ -3,8 +3,7 @@ import { useUser } from "./UseContext.js";
 
 import '../css/trainer-card.css';
 
-const TrainerCard = ({ username, avatar, dob, region }) => {
-  
+const TrainerCard = ({ username, avatar, dob, region, cardImage }) => {
   const { user } = useUser();
 
   function calculateAge(dob) {
@@ -17,7 +16,7 @@ const TrainerCard = ({ username, avatar, dob, region }) => {
   const age = calculateAge(dobDate);
 
   return (
-    <div className="trainer-card">
+    <div className="trainer-card" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/img/bg/trainerCards/${cardImage}` }}>
       <img className="trainer-image" src={`https://play.pokemonshowdown.com/sprites/trainers/${avatar}.png`} alt={username} />
       <div className="trainer-info">
         <h2 className="trainer-id">ID: {user.id}</h2>

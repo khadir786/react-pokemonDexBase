@@ -1,0 +1,52 @@
+.ProfilePage-Container {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: flex-start; /* Align items to the top */
+    padding: 20px;
+}
+
+.ProfileContent {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    z-index: 1; /* Ensure the content is above the Offcanvas */
+}
+
+.UpdateProfileContainer {
+    background-color: rgb(33, 45, 58);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin: 10px;
+    overflow: hidden;
+    max-height: auto;
+    transition: height 0.8s, width 0.8s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    z-index: 1; /* Ensure the content is above the Offcanvas */
+}
+
+.UpdateProfileContainer.age {
+    height: 300px;
+    width: 300px;
+}
+
+.UpdateProfileContainer.avatar {
+    height: 700px;
+    width: 800px;
+}
+
+.UpdateProfileContainer.partner {
+    height: 900px;
+    width: 800px;
+}
+
+.UpdateProfileContainer.region {
+    height: 900px;
+    width: 800px;
+}

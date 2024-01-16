@@ -57,6 +57,10 @@
     z-index: 1; /* Ensure the content is above the Offcanvas */
 }
 
+.UpdateProfileContainer.TrainerCard {
+    height: 260px;
+    width: 440px;
+}
 .UpdateProfileContainer.age {
     height: 200px;
     width: 300px;
@@ -75,4 +79,15 @@
 .UpdateProfileContainer.region {
     height: 680px;
     width: 800px;
+}
+
+.TrainerCardSelect-Container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+.Card-Back:hover, .Card-Next:hover {
+cursor: pointer;
 }

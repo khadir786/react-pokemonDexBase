@@ -11,6 +11,25 @@
     z-index: 1; /* Ensure the content is above the Offcanvas */
 }
 
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.offcanvas-bottom {
+    margin-top: auto;
+}
+
+.offcanvas-bottomItems {
+    border: 0;
+    border-radius: 0;
+}
+
+.list-group-horizontal > .list-group-item:last-child:not(:first-child) {
+    border-top-right-radius: 0;
+}
+
 .offcanvas-home {
     position: absolute;
     bottom: 0;

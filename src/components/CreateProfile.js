@@ -23,7 +23,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
             avatar: 'red-gen2',
             partnerPokemon: null,
             region: null,
-            DoB: '2000-01-01'
+            dob: '2000-01-01'
         })
 
     console.log(userData);
@@ -51,7 +51,7 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
         setDob(newDob);
         setUserData(prevUserData => ({
             ...prevUserData,
-            DoB: newDob
+            dob: newDob
         }))
 
     };
@@ -67,12 +67,12 @@ export default function CreateProfile({ isLoggedIn, setIsLoggedIn }) {
     }
 
     const handleConfirm = async (userID, userData) => {
-        if (userData.avatar === null || userData.partnerPokemon === null || userData.DoB === null || userData.region === null) {
+        if (userData.avatar === null || userData.partnerPokemon === null || userData.dob === null || userData.region === null) {
             const nullProperties = findNullProperties(userData);
             console.log("Null properties:", nullProperties.join(", "));
             return console.log("At least one of the values is null");
         } else {
-            const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.DoB, "region": userData.region, "cardImage" : "defaultCard.jpg" }
+            const request = { "avatar": userData.avatar, "partnerPokemon": userData.partnerPokemon.name, "dob": userData.dob, "region": userData.region, "cardImage" : "defaultCard.jpg" }
             updateUser(userID, request)
                 .then((response) => {
                     console.log(response);

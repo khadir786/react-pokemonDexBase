@@ -4,7 +4,16 @@ import TrainerCard from "./TrainerCard";
 export default function TrainerCardSelect({ userData, setUserData }) {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const cards = ['defaultCard.jpg', 'charizardCard.jpg', 'ho-ohCard.jpg', 'panchamCard.png'];
+    const cards = [
+        'defaultCard.jpg',
+        'charizardCard.jpg',
+        'mismagiusCard.jpg',
+        'ho-ohCard.jpg',
+        'panchamCard.png',
+        'drifloonCard.jpg',
+        'ursaringCard.jpg',
+        'duskullCard.jpg',
+    ];
 
     useEffect(() => {
         setUserData((prevUserData) => ({

@@ -37,7 +37,7 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
         setDob(newDob);
         setUserData(prevUserData => ({
             ...prevUserData,
-            DoB: newDob
+            dob: newDob
         }))
 
     };
@@ -109,8 +109,8 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
             request.partnerPokemon = userData.partnerPokemon.name;
         }
 
-        if (userData.DoB !== null && userData.DoB !== undefined) {
-            request.dob = userData.DoB;
+        if (userData.dob !== null && userData.dob !== undefined) {
+            request.dob = userData.dob;
         }
 
         if (userData.region !== null && userData.region !== undefined) {

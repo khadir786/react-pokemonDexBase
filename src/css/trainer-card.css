@@ -18,7 +18,8 @@
   }
   
   .trainer-info {
-    flex: 1;
+    flex: display;
+    text-align: left;
   }
 
   .trainer-id {

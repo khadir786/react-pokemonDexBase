@@ -74,24 +74,32 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
         }
     }, [user, isLoading])
 
-    const handleClick = (component) => {
+    const handleClick = async (component) => {
         setShowFade(false);
         const userID = user.id;
-        getUser(userID)
-            .then(response => {
-                console.log(response);
-                setUserData(user);
-            })
-            .catch(error => {
-                if (error.response && error.response.data) {
-                    console.error('Error getting user details...:', error.response.data);
-                    logout();
-                }
-            })
-        setTimeout(() => {
-            setActiveComponent(component);
-            setShowFade(true);
-        }, 200);
+        try {
+            const response = await getUser(userID);
+            console.log(response);
+
+            const dobDate = new Date(`${response.data.dob.split('-')[2]}-${response.data.dob.split('-')[1]}-${response.data.dob.split('-')[0]}`);
+
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                dob: dobDate.toString
+            }));
+
+        } catch (error) {
+            if (error.response && error.response.data) {
+                console.error('Error getting user details...:', error.response.data);
+                logout();
+            }
+        }
+        finally {
+            setTimeout(() => {
+                setActiveComponent(component);
+                setShowFade(true);
+            }, 200);
+        }
     }
 
     const handleUpdate = () => {
@@ -166,21 +174,21 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
 
                         {activeComponent === 'Age' && <div className="Profile-AgeContainer">
-                                <h2 className="SectionTitle">How old are you?</h2>
-                                <label htmlFor="dobInput">Date of Birth:</label>
-                                <input
-                                    className="input-dob"
-                                    type="date"
-                                    id="dobInput"
-                                    name="dob"
-                                    value={dob}
-                                    min="1900-01-01"
-                                    max={new Date().toISOString().split('T')[0]} // Set the max to the current date
-                                    onChange={handleDateChange}
-                                />
-                            </div>}
+                            <h2 className="SectionTitle">How old are you?</h2>
+                            <label htmlFor="dobInput">Date of Birth:</label>
+                            <input
+                                className="input-dob"
+                                type="date"
+                                id="dobInput"
+                                name="dob"
+                                value={userData.dob}
+                                min="1900-01-01"
+                                max={new Date().toISOString().split('T')[0]} // Set the max to the current date
+                                onChange={handleDateChange}
+                            />
+                        </div>}
 
-                        {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData}/></div>}
+                        {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
                         <Button onClick={() => { handleUpdate() }}>Update</Button>

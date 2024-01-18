@@ -5,6 +5,7 @@ import AvatarPick from "./AvatarPick";
 import PartnerPick from "./PartnerPick";
 import RegionSelect from "./RegionSelect";
 import TrainerCardSelect from "./TrainerCardSelect.js";
+import DoB from "./DoB.js";
 import { getUser, logoutUser, updateUser } from "../apiService.js";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext.js";
@@ -172,22 +173,7 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                                         : 'TrainerCard'}`}
                     >
                         {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
-
-                        {activeComponent === 'Age' && <div className="Profile-AgeContainer">
-                            <h2 className="SectionTitle">How old are you?</h2>
-                            <label htmlFor="dobInput">Date of Birth:</label>
-                            <input
-                                className="input-dob"
-                                type="date"
-                                id="dobInput"
-                                name="dob"
-                                value={userData.dob}
-                                min="1900-01-01"
-                                max={new Date().toISOString().split('T')[0]} // Set the max to the current date
-                                onChange={handleDateChange}
-                            />
-                        </div>}
-
+                        {activeComponent === 'Age' && <div><DoB userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
                         {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}

@@ -7,7 +7,7 @@ import '../css/region.css'
 
 const regions = Regions.data.regions;
 
-export default function RegionSelect({ userData, setUserData }) {
+export default function RegionSelect({ userData, setUserData, edit }) {
     const [activeIndex, setActiveIndex] = useState(0);
     const [selectedRegion, setSelectedRegion] = useState(null);
 
@@ -18,10 +18,14 @@ export default function RegionSelect({ userData, setUserData }) {
         console.log('Image Name:', regions);
         setActiveIndex(selectedIndex);
         setSelectedRegion(regions[selectedIndex].name);
-        setUserData(prevUserData => ({
-            ...prevUserData, 
-            region: regions[selectedIndex].name,
-        }))
+        if (edit) {
+            setUserData({ region: regions[selectedIndex].name })
+        } else {
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                region: regions[selectedIndex].name,
+            }))
+        }
     };
 
     const region = regions.find(region => region.name === userData.region);

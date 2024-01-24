@@ -3,7 +3,7 @@ import PartnerSprites from "./data/PartnerData.js";
 import '../css/selection.css';
 import Carousel from 'react-bootstrap/Carousel';
 
-export default function PartnerPick({ userData, setUserData }) {
+export default function PartnerPick({ userData, setUserData, edit }) {
     const partners = PartnerSprites.data.partner
     {
         const [activeIndex, setActiveIndex] = useState(2);
@@ -14,10 +14,14 @@ export default function PartnerPick({ userData, setUserData }) {
         const handlePreviewClick = (index, pokemon) => {
             setActiveIndex(index);
             setActivePokemon(pokemon.name);
-            setUserData(prevUserData => ({
-                ...prevUserData,
-                partnerPokemon: pokemon
-            }))
+            if (edit) {
+                setUserData({ partnerPokemon: pokemon })
+            } else {
+                setUserData(prevUserData => ({
+                    ...prevUserData,
+                    partnerPokemon: pokemon
+                }))
+            }
             setActiveEntry(pokemon.dexEntry);
         };
 

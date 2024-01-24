@@ -16,10 +16,7 @@ export default function TrainerCardSelect({ userData, setUserData }) {
     ];
 
     useEffect(() => {
-        setUserData((prevUserData) => ({
-            ...prevUserData,
-            cardImage: cards[activeIndex],
-        }));
+        setUserData({ cardImage: cards[activeIndex] });
     }, [activeIndex, setUserData]);
 
     const handleBackOrNext = (backOrNext) => {

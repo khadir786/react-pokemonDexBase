@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 
-export default function DoB({ userData, setUserData }) {
+export default function DoB({ userData, setUserData, edit }) {
     const [dob, setDob] = useState('2000-01-01');
 
 
     const handleDateChange = (event) => {
         const newDob = event.target.value;
         setDob(newDob);
-        setUserData(prevUserData => ({
-            ...prevUserData,
-            dob: newDob
-        }))
+        if (edit) {
+            setUserData({ dob: newDob })
+        } else {
+            setUserData(prevUserData => ({
+                ...prevUserData,
+                dob: newDob
+            }))
+        }
 
     };
     return (

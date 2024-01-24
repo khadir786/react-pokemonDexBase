@@ -172,11 +172,11 @@ export default function Profile({ isLoggedIn, setIsLoggedIn }) {
                                     : activeComponent === 'Partner' ? 'partner'
                                         : 'TrainerCard'}`}
                     >
-                        {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} /></div>}
-                        {activeComponent === 'Age' && <div><DoB userData={userData} setUserData={setUserData} /></div>}
-                        {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData} /></div>}
-                        {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} /></div>}
-                        {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} /></div>}
+                        {activeComponent === 'Avatar' && <div><AvatarPick userData={userData} setUserData={setUserData} edit={true} /></div>}
+                        {activeComponent === 'Age' && <div><DoB userData={userData} setUserData={setUserData} edit={true}/></div>}
+                        {activeComponent === 'TrainerCard' && <div><TrainerCardSelect userData={userData} setUserData={setUserData} edit={true}/></div>}
+                        {activeComponent === 'Partner' && <div><PartnerPick userData={userData} setUserData={setUserData} edit={true}/></div>}
+                        {activeComponent === 'Region' && <div><RegionSelect userData={userData} setUserData={setUserData} edit={true}/></div>}
                         <Button onClick={() => { handleUpdate() }}>Update</Button>
                     </div>
                 </div>

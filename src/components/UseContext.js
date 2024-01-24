@@ -17,10 +17,10 @@ export const UserProvider = ({ children }) => {
                 if (response && response.data) {
                     setUser(response.data);
                 } else {
-                    setUser(null);
+                    logout();
                 }
             } catch (error) {
-                setUser(null);
+                logout();
             }
             setIsLoading(false);
         };

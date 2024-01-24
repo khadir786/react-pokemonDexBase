@@ -1,5 +1,4 @@
 .trainer-card {
-    background-image :url(../img/bg/trainer-card2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -19,14 +18,15 @@
   }
   
   .trainer-info {
-    flex: 1;
+    flex: display;
+    text-align: left;
   }
-  
-  .trainer-name {
+
+  .trainer-id {
     font-size: 24px;
-    margin: 0;
   }
   
+  .trainer-name,
   .trainer-age,
   .trainer-location {
     font-size: 16px;

@@ -12,7 +12,7 @@ export default function Confirmation({ userData, username, activeIndex, setActiv
         <img
           src={`https://play.pokemonshowdown.com/sprites/trainers/${avatar}.png`}
           alt={avatar}
-          onClick={() => (setActiveIndex(0))}
+          onClick={() => (setActiveIndex(1))}
         />
       </div>
       <div className="Confirmation-username">
@@ -23,7 +23,7 @@ export default function Confirmation({ userData, username, activeIndex, setActiv
           className="Confirmation-sprite"
           src={userData.partnerPokemon?.image}
           alt={userData.partnerPokemon?.name}
-          onClick={() => (setActiveIndex(1))}
+          onClick={() => (setActiveIndex(2))}
         />
       </div>
       <>

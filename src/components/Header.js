@@ -1,13 +1,14 @@
 import React from "react"
 import logo from '../img/logo.png'
-import Button from 'react-bootstrap/Button';
+import ProfileMenu from "./sub_components/ProfileMenu";
+import { Button } from "react-bootstrap";
 import { logoutUser } from "../apiService";
-import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext";
+import { useNavigate } from "react-router-dom";
 
-export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
-    const navigate = useNavigate();
+export default function Header({ isLoggedIn, setIsLoggedIn, userData }) {
     const { logout } = useUser();
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
         logoutUser()
@@ -25,10 +26,20 @@ export default function Header({ isLoggedIn, setIsLoggedIn, logged }) {
 
     return (
         <nav style={{ width: '100%' }} className={isLoggedIn ? "headerLogged" : "header"}>
-            <img className="Logo" alt="logo" src={logo} />
-            {isLoggedIn &&
-                <Button variant="secondary" className="LogoutButton" onClick={handleLogout}>Logout</Button>}
+            <img className={isLoggedIn ? "logoLogged" : "Logo"} alt="logo" src={logo} />
+            {
+                isLoggedIn &&
+                <div className="header-right">
+                    {userData ?
+                        <ProfileMenu
+                            userData={userData}
+                            setIsLoggedIn={setIsLoggedIn}
+                            handleLogout={handleLogout}
+                        />
+                        : <Button variant="secondary" onClick={handleLogout}>Logout</Button>
+                    }
+                </div>
+            }
         </nav>
-
     )
 }

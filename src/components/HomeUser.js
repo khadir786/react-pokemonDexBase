@@ -63,14 +63,14 @@ export default function HomeUser({ isLoggedIn, setIsLoggedIn }) {
 
     return (
         <div className="home-user">
-            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} userData={userData}/>
             <div className="user-content">
 
                 <h1 className="user-welcome">Welcome!</h1>
 
                 {isLoading === false ?
                     <div className="user-info-container">
-                        {foundAvatar && (<TrainerCard username={userData.username} avatar={foundAvatar.name} />)}
+                        {foundAvatar && (<TrainerCard username={userData.username} avatar={foundAvatar.name} dob={userData.dob} region={userData.region} cardImage={userData.cardImage}/>)}
                         {foundPartner && (<PartnerPokemon openEntry={openEntry} setOpenEntry={setOpenEntry} foundPartner={foundPartner} />)}
                     </div> : <Dots />
 

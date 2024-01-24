@@ -12,6 +12,7 @@ import HomeUser from './components/HomeUser';
 import TrainerImageGallery from './components/AvatarPick';
 import PartnerPick from './components/PartnerPick';
 import CreateProfile from './components/CreateProfile';
+import Profile from './components/Profile';
 
 
 function App() {
@@ -81,6 +82,14 @@ function App() {
               element={
                 <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
                   <CreateProfile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}>
+                  <Profile />
                 </ProtectedRoute>
               }
             />

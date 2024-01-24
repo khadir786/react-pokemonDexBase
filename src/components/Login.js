@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../apiService";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./UseContext";
+import { validateInput } from "../utils/formValidation";
 import '../css/register-login.css';
 import '../css/rl-transitions.css';
 
@@ -47,16 +48,13 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (!formData.username || !formData.username) {
-            setErrorMessage(prevErrorMessage => {
-                return {
-                    type: "warning",
-                    message: "Please fill out all fields",
-                    heading: "Warning!"
-                }
-            })
-            return setErrorOpen(true);
+
+        // Validate the input
+        if (!validateInput(formData, setErrorMessage, () => {}, "LOGIN")) {
+            setErrorOpen(true);
+            return;
         }
+
         setLoading(true);
 
         loginUser(formData.username, formData.password)
@@ -65,18 +63,16 @@ export default function Login({ isLoggedIn, setIsLoggedIn }) {
                 // Handle success...
                 login(response);
                 setIsLoggedIn(true);
-                navigate('/home')
+                navigate('/home');
             })
             .catch(error => {
                 if (error.response && error.response.data) {
                     console.error('Login failed:', error.response.data);
-                    setErrorMessage(prevErrorMessage => {
-                        return {
-                            type: "error",
-                            message: error.response.data,
-                            heading: "Login failed..."
-                        }
-                    })
+                    setErrorMessage({
+                        type: "error",
+                        message: error.response.data,
+                        heading: "Login failed..."
+                    });
                     setErrorOpen(true);
                 }
             })

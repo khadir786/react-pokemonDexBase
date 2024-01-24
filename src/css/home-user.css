@@ -15,6 +15,40 @@ body {
     /* padding-bottom: 0px; */
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.menu-items {
+    padding: 10px;
+    text-align: center;
+}
+
+.profile-pic-Container {
+    width: auto;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: border-color 0.3s;
+    background-color: rgb(20, 28, 41);
+    margin-right: 10px;
+}
+
+.profile-pic-Container:hover {
+    border-color: #0056b3;
+    cursor: pointer;
+}
+
+.profile-pic {
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+}
+
 .home-user {
     font-family: Arial, sans-serif;
     color: white;
@@ -41,7 +75,7 @@ body {
 #dexEntry {
     margin-top: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
-    padding: 5px;   
+    padding: 5px;
 }
 
 #dexEntry-active {
@@ -52,6 +86,10 @@ body {
 
 .user-welcome {
     font-size: 24px;
+    margin: 10px;
+}
+
+.input-dob {
     margin: 10px;
 }
 
@@ -102,14 +140,21 @@ body {
 }
 
 .dex-footer {
-    margin-top: 5px ;
+    margin-top: 5px;
     font-size: .875rem;
     color: #6c757d;
 }
 
-/* .Logo {
-    margin: 10px;
+.button-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.logoLogged {
+    width: 20%;
     margin-right: auto;
-    max-width: 200px;
-    max-height: 200px;
-} */
+}
+
+.Logo {
+    width: auto;
+}

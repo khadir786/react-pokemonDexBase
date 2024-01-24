@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react"
 import LoadingButton from "./sub_components/LoadingButton"
-import ModalComp from "./sub_components/ModalComp";
+import Alert from 'react-bootstrap/Alert';
 import Header from "./Header";
 import Collapse from 'react-bootstrap/Collapse';
+import { validateInput } from "../utils/formValidation";
 import { registerUser } from "../apiService"
 import { CSSTransition } from 'react-transition-group';
 import { Link } from "react-router-dom";
@@ -16,7 +17,7 @@ export default function Register(props) {
     )
     const [errorMessage, setErrorMessage] = useState({ type: "", message: "", heading: "" });
     const [isLoading, setLoading] = useState(false);
-    const [showModal, setShowModal] = useState(false);
+    const [showPasswordRules, setShowPasswordRules] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
     const registerRef = useRef(null);
 
@@ -48,49 +49,39 @@ export default function Register(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (!formData.username || !formData.password) {
-            setErrorMessage(prevErrorMessage => {
-                return {
-                    type: "warning",
-                    message: "Please fill out all fields",
-                    heading: "Warning!"
-                }
-            })
-            return setErrorOpen(true);
+
+        // Validate the input
+        if (!validateInput(formData, setErrorMessage, setShowPasswordRules, "REGISTER")) {
+            setErrorOpen(true);
+            return;
         }
+
         setLoading(true);
 
         registerUser(formData)
             .then(response => {
                 console.log('Registration successful:', response);
                 // Handle success...
-                setErrorMessage(prevErrorMessage => {
-                    return {
-                        type: "success",
-                        message: `User: ${response.username} has been registered!!!`,
-                        heading: "Success!"
-                    }
-                })
+                setErrorMessage({
+                    type: "success",
+                    message: `User: ${response.username} has been registered!`,
+                    heading: "Success!"
+                });
                 setErrorOpen(true);
-
             })
             .catch(error => {
                 if (error.response && error.response.data) {
-                    console.error('Registration failed:', error.response.data); //this works for some reason
-                    setErrorMessage(prevErrorMessage => {
-                        return {
-                            type: "error",
-                            message: error.response.data,
-                            heading: "Registration failed..."
-                        }
-                    })
+                    console.error('Registration failed:', error.response.data);
+                    setErrorMessage({
+                        type: "error",
+                        message: error.response.data,
+                        heading: "Registration failed..."
+                    });
                     setErrorOpen(true);
                 }
             })
             .finally(() => setLoading(false));
     }
-
-
 
     return (
         <div className="Landing">
@@ -109,7 +100,10 @@ export default function Register(props) {
                 >
                     <h1 className="register-login-title">Register</h1>
                     <form onSubmit={handleSubmit}>
-                        <div className="rl-input-container" onClick={() => setErrorOpen(false)}>
+                        <div className="rl-input-container" onClick={() => {
+                            setErrorOpen(false);
+                            setShowPasswordRules(false);
+                        }}>
                             <input
                                 className="input-username"
                                 type="text"
@@ -129,12 +123,25 @@ export default function Register(props) {
                     </form>
                     <LoadingButton onClick={handleSubmit} isLoading={isLoading} />
                     <Collapse in={errorOpen}>
-                        <div id="errorMessage" style={{
-                            color: errorMessage.type === 'error' ? 'red' :
-                                errorMessage.type === 'success' ? 'green' : 'yellow'
-                        }}>
-                            {errorMessage.message}
+                        <div>
+                            <div id="errorMessage" style={{
+                                color: errorMessage.type === 'error' ? 'red' :
+                                    errorMessage.type === 'success' ? 'green' : 'yellow'
+                            }}>
+                                {errorMessage.message}
+                            </div>
+                            {showPasswordRules && (<div className="passwordRules-Alert">
+                                <Alert variant="warning">
+                                    <Alert.Heading>Your Password Must:</Alert.Heading>
+                                    <hr />
+                                    <li className="passwordRules">Contain at least one uppercase or lowercase letter</li>
+                                    <li className="passwordRules">Contain at least one digit</li>
+                                    <li className="passwordRules">Contain at least one of the specified special characters (@$!%*#?&)</li>
+                                    <li className="passwordRules">Be at least 8 characters in length</li>
+                                </Alert>
+                            </div>)}
                         </div>
+
                     </Collapse>
                     <p className="link-reg-log">Already have an account? <span><Link to="/login">Login here </Link></span></p>
 
